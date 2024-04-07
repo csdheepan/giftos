@@ -1,0 +1,22 @@
+<div fXlayout="row" fxLayoutAlign="center center">
+
+  <div class="confirmation-container">
+    <mat-icon class="success-icon">check_circle</mat-icon>
+    <p class="confirmation-message">Your order has been successfully placed!</p>
+    <div class="order-details">
+      <p><strong>Order ID : </strong> {{shippingDetails.orderId}}</p>
+      <p><strong>Order Date : </strong> {{shippingDetails.orderDate}}</p>
+      <p><strong>Shipping Address : </strong> {{shippingDetails.address}} {{shippingDetails.city}} </p>
+      <p><strong>Country : </strong> {{shippingDetails.country}}</p>
+      <p><strong>Phone Number : </strong>{{shippingDetails.phoneNumber}}</p>
+      <p><strong>Mode of Payment : </strong> {{shippingDetails.paymentMode}}</p>
+      <p><strong>Total Amount : </strong>${{shippingDetails.totalAmount}}</p>
+      <p><strong>Estimated Delivery : </strong>{{shippingDetails.deliveryDate}}</p>
+    </div>
+  
+    <div class="back-to-home">
+        <button (click)="goHome()">Back to Home</button>
+    </div>
+  </div>
+
+</div>

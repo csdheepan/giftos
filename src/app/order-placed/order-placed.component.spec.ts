@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { OrderPlacedComponent } from './order-placed.component';
+
+describe('OrderPlacedComponent', () => {
+  let component: OrderPlacedComponent;
+  let fixture: ComponentFixture<OrderPlacedComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [OrderPlacedComponent]
+    });
+    fixture = TestBed.createComponent(OrderPlacedComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

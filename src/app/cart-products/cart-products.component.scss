@@ -1,0 +1,359 @@
+body {
+    max-width: 1850px;
+    margin: auto;
+    font-family: system-ui;
+}
+
+nav {
+    background-color: pink;
+}
+
+nav h2 {
+    font-size: 22px;
+    padding: 25px 40px;
+    font-weight: 500;
+}
+
+nav h2 mat-icon {
+    transform: scale(1.2);
+    position: relative;
+    top: 5px;
+    left: -7px;
+}
+
+.card-container {
+    max-width: 75%;
+    margin: auto;
+    border: 1px solid #c6c6c6;
+    padding: 40px;
+    border-radius: 10px;
+    position: relative;
+    top: 10px;
+}
+
+section h5 {
+    font-size: 30px;
+    line-height: 95px;
+    font-weight: 500;
+}
+
+.radio-label,
+section h6 {
+    font-size: 30px;
+    line-height: 75px;
+    font-weight: 300;
+}
+
+input[type="radio" i] {
+    margin: 0px 30px;
+    transform: scale(2);
+    position: relative;
+    top: -3px;
+    left: 6px;
+    cursor: pointer;
+}
+
+section p {
+    font-size: 26px;
+    line-height: 40px;
+    font-weight: 400;
+    font-family: system-ui;
+    text-align: left;
+}
+
+.cart-container {
+    margin: 40px;
+    padding: 20px;
+    border: 1px solid #a5a5a5;
+    box-shadow: rgb(202 202 202) 0px 0px 15px;
+    border-radius: 10px;
+}
+
+.cart-c {
+    width: 20%;
+    display: flex;
+}
+
+.product-image {
+    margin: 30px;
+    width: 105px;
+}
+
+.title {
+    color: #a2a2a2;
+}
+
+.value {
+    color: black;
+}
+
+
+#total-label {
+    color: red;
+}
+
+#total-value {
+    color: #ff005b;
+}
+
+.like-button {
+    padding: 14px;
+    background: white;
+    margin: 0px 20px;
+    border: none;
+}
+
+.remove-button {
+    background: #ff6580;
+    font-size: 22px;
+    padding: 16px 20px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.cont-1 {
+    border: 1px solid rgb(179, 179, 179);
+    margin: 40px;
+    box-shadow: rgb(202 202 202) 0px 0px 15px;
+    padding: 35px;
+    border-radius: 30px;
+}
+
+.purchase-btn,
+.shop-btn {
+    margin: auto;
+    width: 60%;
+    padding: 25px 105px;
+    font-size: 22px;
+    border: none;
+    border-radius: 10px;
+}
+
+.shop-btn {
+    background: transparent;
+    color: black;
+    border: 1px solid;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.purchase-btn {
+    background: #ff0c77ab;
+    color: white;
+    cursor: pointer;
+}
+
+.list-product-container {
+    max-height: 650px;
+    overflow-y: auto;
+}
+
+#like-icon {
+    transform: scale(1.5);
+    margin: 0px 30px;
+}
+
+mat-form-field {
+    width: 100%;
+    margin: 10px;
+}
+
+
+.remove-icon-button {
+    display: none;
+}
+
+#remove-icon-button {
+    display: none;
+}
+
+.pay-now-btn {
+    padding: 25px 40px;
+    font-size: 17px;
+    margin: 20px 0px;
+    border-radius: 10px;
+}
+
+.divider {
+    border: 1px solid rgb(148, 148, 148);
+    width: 100%;
+    margin: 15px 0px;
+}
+
+mat-error {
+    margin-left: -15px;
+    margin-top: 3px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+//styles for mobile
+@media only screen and (max-width:680px) {
+
+    .cart-container {
+        margin: 15px;
+        padding: 20px
+    }
+
+    section h5 {
+        font-size: 20px;
+        line-height: 55px;
+    }
+
+    .title,
+    .value {
+        font-size: 15px !important;
+        line-height: 24px !important;
+        font-weight: 700;
+    }
+
+    .radio-label,
+    section h6 {
+        font-size: 16px;
+        line-height: 35px;
+        color: #a0a0a0;
+        font-weight: 400;
+    }
+
+    section p {
+        font-size: 14px;
+        line-height: 34px;
+        font-weight: 700;
+    }
+
+    #total-label,
+    #total-value {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .purchase-btn,
+    .shop-btn {
+        padding: 15px 25px;
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .product-image {
+        margin: 10px;
+        width: 45px;
+    }
+
+    .remove-button {
+        font-size: 9px;
+        padding: 6px 10px;
+        margin: 0px 10px;
+        transform: scale(0.8);
+    }
+
+    .like-button {
+        display: none;
+    }
+
+    input[type="radio" i] {
+        margin: 15px;
+        position: relative;
+        top: 0px;
+        left: 4px;
+        transform: scale(1.5);
+    }
+
+    #remove-icon-button {
+        display: block;
+        background-color: rgb(255 68 68);
+    }
+
+    .remove-button {
+        display: none;
+    }
+
+    .pay-now-btn {
+        font-size: 14px;
+        padding: 20px;
+    }
+
+    .card-container {
+        max-width: 100%;
+        border: none;
+        padding: 0px; 
+    }
+}
+
+
+//style for tablet
+@media only screen and (min-width:681px) and (max-width:1200px) {
+
+    .product-image {
+        margin: 18px;
+    }
+
+    section p {
+        font-size: 20px;
+        line-height: 27px;
+        font-weight: 600;
+    }
+
+    .remove-button {
+        font-size: 18px;
+        padding: 15px 30px;
+    }
+
+    #like-icon {
+        transform: scale(1.2);
+        margin: 0px 15px;
+    }
+
+    section h5 {
+        font-size: 28px;
+        line-height: 90px;
+    }
+
+    .radio-label,
+    section h6 {
+        font-size: 22px;
+        line-height: 45px;
+        color: #787878;
+        font-weight: 500;
+    }
+
+    #total-label,
+    #total-value {
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 60px;
+    }
+
+    .purchase-btn,
+    .shop-btn {
+        padding: 20px 80px;
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+
+    .cart-c {
+        width: 20%;
+        display: block;
+    }
+
+    input[type="radio" i] {
+        transform: scale(1.5);
+        margin: 0px 20px;
+    }
+}
+
+@media only screen and (min-width:1201px) {
+
+    .cont-1 {
+        max-width: 55%;
+        margin: auto;
+        margin-bottom: 50px;
+    }
+}
+
+.liked {
+    color: #ff6580;
+}

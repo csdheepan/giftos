@@ -1,0 +1,270 @@
+body {
+    max-width: 1850px;
+    margin: auto;
+    font-family: system-ui;
+}
+
+nav {
+    background-color: #f89cab;
+    display: flex;
+    place-content: space-around;
+    padding: 15px;
+}
+
+nav div {
+    display: flex;
+    align-items: center;
+}
+
+nav mat-icon {
+    margin: 10px;
+    transform: scale(1.2);
+    color: black;
+}
+
+.right-side-icon {
+    margin: 12px 20px !important;
+}
+
+nav h2 {
+    font-size: 20px;
+    margin: 6px;
+    line-height: 33px;
+    color: #3b3b3b;
+    font-weight: 500;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-container:hover {
+    border: none;
+}
+
+.search-container input[type="text"] {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 15px;
+    border: none;
+    height: 15px;
+    font-size: 18px;
+}
+
+.search-container select {
+    padding: 14px 25px;
+    border: none;
+    height: 45px;
+    font-size: 18px;
+}
+
+.search-container button {
+    padding: 0px 15px;
+    height: 45px;
+    border: none;
+    background: white;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    font-size: 18px;
+}
+
+.search-icon {
+    transform: scale(1) !important;
+}
+
+
+option {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+option:hover {
+    background-color: #ffffff;
+    color: white;
+}
+
+option:checked {
+    background-color: #f89cab;
+    color: white;
+}
+
+
+.box {
+    background-color: #e9e9e9;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.price-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.price-details p {
+    color: black;
+    text-align: center;
+    font-weight: 500;
+}
+
+.price-details p span {
+    color: rgb(230, 77, 103);
+}
+
+.add-cart-btn {
+    background: #f33d5b !important;
+    color: white !important;
+}
+
+.add-cart-btn:hover {
+    background: white !important;
+    color: #f33d5b !important;
+    border: 1px solid #f33d5b;
+}
+
+.cart-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.cart-count {
+    position: absolute;
+    top: 2px;
+    right: -2px;
+    background-color: #ffffff;
+    color: #f89cab;
+    border-radius: 10px;
+    padding: 0px 5px;
+    font-size: 12px;
+}
+
+//styles for mobile
+@media screen and (max-width:740px) {
+
+    .handle-view-container {
+        display: none !important;
+    }
+
+    nav {
+        display: flex;
+        place-content: center;
+    }
+
+    .search-container input[type="text"] {
+
+        padding: 15px;
+        border-radius: 10px;
+        height: 15px;
+        font-size: 16px;
+        width: 215px;
+    }
+
+    .search-container select {
+        display: none;
+    }
+
+    .search-container button {
+        display: none;
+    }
+
+    .right-side-icon {
+        margin: 0px 13px !important;
+    }
+
+    nav mat-icon {
+        transform: scale(1);
+    }
+
+    .search-icon {
+        transform: scale(0.8) !important;
+    }
+
+    .box {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    .box img {
+        margin: 20px;
+        height: 60px;
+        width: 80px;
+    }
+
+    .price-details p {
+        font-size: 16px;
+        margin: 5px;
+    }
+
+    .add-cart-btn {
+        margin: 20px 0px;
+        padding: 13px;
+        font-size: 13px;
+    }
+}
+
+
+//styles for tablet 
+@media screen and (min-width:741px) and (max-width:1200px) {
+
+    .box {
+        margin: 25px;
+        padding: 40px;
+    }
+
+    .box img {
+
+        margin: 30px;
+        height: 95px;
+        width: 120px;
+    }
+
+    .price-details p {
+        font-size: 22px;
+        margin: 10px;
+    }
+
+    .add-cart-btn {
+        margin: 30px 0px;
+        padding: 22px;
+        font-size: 17px;
+    }
+}
+
+
+//styles for laptop and desktop
+@media screen and (min-width:1201px) {
+
+    .box img {
+        margin: 40px;
+        height: 135px;
+        width: 160px;
+    }
+
+    .box {
+        margin: 40px;
+        padding: 30px;
+    }
+
+    .price-details p {
+        font-size: 24px;
+        margin: 15px;
+    }
+
+    .add-cart-btn {
+        margin: 30px 0px;
+        padding: 25px;
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width:980px) {
+    .handle-view-container{
+        display: none !important;
+    }
+}
