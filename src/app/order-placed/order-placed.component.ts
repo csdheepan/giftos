@@ -21,8 +21,8 @@ export class OrderPlacedComponent implements OnInit {
 
   }
 
-  goHome(){
-   this.router.navigate(['home']);
-   this.store.clear();
+  navigateBack(){
+   this.router.navigate(['full/products']);
+   this.store.removeItem('SHIPPING_DETAILS');
   }
 }

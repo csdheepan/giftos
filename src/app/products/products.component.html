@@ -1,46 +1,52 @@
 <body>
 
-<nav>
-
-    <div class="handle-view-container">
-        <mat-icon>shopping_basket</mat-icon>
-        <h2>All Products</h2>
-    </div>
-
     <div class="search-container">
         <input type="text" placeholder="Search Products" (keyup)="serachProduct(product.value)" #product>
         <select>
-          <option>Men Wear</option>
-          <option>Women Wear</option>
           <option>Phone</option>
           <option>Laptop</option>
           <option>Tv</option>
+          <option>Electronics</option>
         </select>
         <button>
           <mat-icon class="search-icon">search</mat-icon>
         </button>
       </div>      
-
-
-    <div class="cart-container">
-        <mat-icon (click)="navigateHome()" class="right-side-icon">home</mat-icon>
-        <mat-icon class="cart-icon"  (click)="navigateCart()">shopping_cart</mat-icon>
-        <span class="cart-count" >{{ cartCount }}</span>
-      </div>
       
-</nav>
-
 <section>
-    <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <div class="box" *ngFor="let product of listProducts">
-        <img [src]="product.image" width="150px" class="product-image">
-        <div class="price-details">
-          <p>{{product.name}}</p>
-          <p>price <span>{{product.price}}</span></p>
-          <button mat-raised-button color="warn"(click)="addToCart(product)" class="add-cart-btn">Add Cart</button>
+  <div>
+      <div class="product-container">
+        <div class="box" *ngFor="let product of listProducts">
+
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-icon [ngClass]="{'liked': product.likedProduct}" (click)="handleLike(product)">
+              {{  product.likedProduct ? 'favorite' : 'favorite_border'}}</mat-icon>
+            <mat-icon (click)="previewProduct(product)">remove_red_eye</mat-icon>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center">
+            <img [src]="product.image" width="150px" class="product-image">
+          </div>
+
+          <div class="price-details">
+            <p>{{ product.name }}</p>
+            <span fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+              <p>Price <span>{{ product.price }}</span></p>
+              <p class="actual-price">{{product.actualPrice}}</p>
+            </span>
+            <span fxLayout="row" fxLayoutAlign="center center">
+              <ng-container *ngFor="let star of generateStars(product.star)">
+                <mat-icon class="star-icon">{{ star }}</mat-icon>
+              </ng-container>
+              <span> <strong>({{product.totalRating}})</strong></span>
+            </span>
+            <div>
+              <button class="add-cart-btn" (click)="addToCart(product)">Add Cart</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+  </div>
 </section>
 
 </body>

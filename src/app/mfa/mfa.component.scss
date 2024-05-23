@@ -1,0 +1,71 @@
+.container-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.account-button {
+    margin: auto;
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 16px;
+    background: #f75151;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 60%;
+    margin-top: 30px;
+}
+
+.account-button:hover {
+    background-color: transparent;
+    color: #f75151;
+    border: 1px solid #f75151;
+}
+
+.account-button:disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+h1 {
+    white-space: nowrap;
+}
+
+.inner-container {
+    padding: 40px;
+    border-radius: 25px;
+    margin: 20px;
+    background: #f6f6f6;
+}
+
+.alert {
+    padding: 15px;
+    background-color: #f75151;
+    color: white;
+    margin: -10px 0px 30px 0px;
+    width: 93%;
+    font-size: 13px;
+    font-family: system-ui;
+    letter-spacing: 1px;
+    border-radius: 10px;
+}
+
+p {
+    font-size: 14px;
+    margin: 15px 0px 30px 0px;
+    font-family: system-ui;
+    color: #919191;
+}
+
+mat-error {
+    margin: 3px -12px;
+    font-size: 12px;
+}
+
+mat-icon {
+    position: relative;
+    top: 4px;
+    left: -2px;
+}

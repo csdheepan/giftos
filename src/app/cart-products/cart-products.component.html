@@ -1,160 +1,130 @@
 <body>
-
-    <nav>
-        <h2> <mat-icon>shopping_cart</mat-icon> Shopping Cart</h2>
-    </nav>
-
     <form [formGroup]="form">
-    <section>
-
-        <div fxLayout="column" fxLayoutAlign="space-between" style="max-width: 1220px;">
-
-            <div class="cart-container"> 
-                <h5>Your Cart</h5>
-                <div class="list-product-container">
-                <div *ngFor="let product of listProducts;let i = index" fxLayout="row" fxLayoutAlign="space-around center" style="padding: 15px 5px;">
-                    <p class="value">{{i+1}}</p>
-                  <img [src]="product.image" class="product-image">
-                  <div fxLayout="column" class="cart-c">
-                    <p class="title">{{product.name}}</p>
-                    <p class="value">{{product.price}}</p>
-                  </div>
-                  <div class="cart-c">
-                    <button class="like-button" (click)="toggleLike(i)">
-                        <mat-icon [ngClass]="{'liked': likedProducts[i]}" id="like-icon">
-                             {{  likedProducts[i] ? 'favorite' : 'favorite_border'}}</mat-icon>
-                    </button>
-                        <div>
-                            <button class="remove-button" (click)="removeProduct(product,i)">Remove</button>
-                        </div>
-                            <button id="remove-icon-button" class="remove-button" (click)="removeProduct(product,i)">
-                                <mat-icon>delete_outline</mat-icon>
-                            </button>
-                  </div>
-                </div>
-
-                <div  *ngIf="listProducts === null">
-                   <p style="text-align: center;">Your cart is currently empty. Browse our shop and find something special to add!</p>
-                </div>
-            </div>
-            </div>
-
-            <div>
-
-                <div fxLayout="column" fxLayoutAlign="space-around">
-
-                    <div class="cont-1">
-
-                        <div>
-                            <div fxLayout="row wrap" fxLayoutAlign="space-between">
-                                <h6>Overall Price</h6>
-                                <p>${{overallPrice}}</p>
+        <section>
+            <div fxLayout="column" fxLayoutAlign="space-between" style="max-width: 1220px;">
+                <div class="cart-container">
+                    <h5>Your Cart</h5>
+                    <div class="list-product-container">
+                        <div *ngFor="let product of listProducts;let i = index" fxLayout="row"
+                            fxLayoutAlign="space-around center" style="padding: 15px 5px;">
+                            <img [src]="product.image" class="product-image">
+                            <div fxLayout="column" class="cart-c">
+                                <p class="title">{{product.name}}</p>
+                                <p class="value">{{product.price}}</p>
                             </div>
-                            <div fxLayout="row" fxLayoutAlign="space-between">
-                                <h6>Discount</h6>
-                                <p>${{discount}}</p>
-                            </div>
-                             <div fxLayout="row" fxLayoutAlign="space-between">
-                                <h6>Tax</h6>
-                                <p>${{tax}}</p>
-                            </div>
-                            <div fxLayout="row" fxLayoutAlign="space-between">
-                                <h6 id="total-label">Total Price</h6>
-                                <p id="total-value">${{totalCost}}</p>
+                            <div class="cart-c">
+                                <button class="like-button">
+                                    <mat-icon [ngClass]="{'liked': product.likedProduct}" id="like-icon">
+                                        {{ product.likedProduct ? 'favorite' : 'favorite_border'}}</mat-icon>
+                                </button>
+                                <div>
+                                    <button class="remove-button" (click)="removeProduct(product,i)">Remove</button>
+                                </div>
+                                <button id="remove-icon-button" class="remove-button"
+                                    (click)="removeProduct(product,i)">
+                                    <mat-icon>delete_outline</mat-icon>
+                                </button>
                             </div>
                         </div>
 
-                        <div class="divider"></div>
-
-                     <h5>Shipping Details</h5>
-                     <div fxLayout="row wrap" fxLayout.xs="column" fxLayout.sm="column">
-                      
-                        <mat-form-field appearance="outline">
-                            <mat-label>Address</mat-label>
-                            <input matInput placeholder="12X Street name" [formControl]="form.controls['address']" maxLength="45">
-                            <mat-error *ngIf="form.controls['address'].touched && form.controls['address'].hasError('required')">
-                                Address field required
-                            </mat-error>
-                          </mat-form-field>
-
-                          <mat-form-field appearance="outline">
-                            <mat-label>City</mat-label>
-                            <input matInput placeholder="Chennai" [formControl]="form.controls['city']"  maxLength="25">
-                            <mat-error *ngIf="form.controls['city'].touched && form.controls['city'].hasError('required')">
-                                City field required
-                            </mat-error>
-                          </mat-form-field>
-
-                          <mat-form-field appearance="outline">
-                            <mat-label>Country</mat-label>
-                            <input matInput placeholder="India" [formControl]="form.controls['country']"  maxLength="20">
-                            <mat-error *ngIf="form.controls['country'].touched && form.controls['country'].hasError('required')">
-                                Country field required
-                            </mat-error>
-                          </mat-form-field>
-
-                          <mat-form-field appearance="outline">
-                            <mat-label>PhoneNumber</mat-label>
-                            <input matInput placeholder="98777XXX" [formControl]="form.controls['phoneNumber']"  maxLength="15">
-                            <mat-error *ngIf="form.controls['phoneNumber'].touched && form.controls['phoneNumber'].hasError('required')">
-                                Phone Number field required
-                            </mat-error>
-                          </mat-form-field>
-                     </div>
-                     <div class="divider"></div>
-
-                     <h5>Payment Mode</h5>
-                     <div>
-                        <input type="radio" name="payment_mode" value="cash on delivery" #cash (change)="paymentMode(cash.value)" [formControl]="form.controls['paymentMode']">
-                         <label class="radio-label">Cash on Delivery</label>
-                          <input type="radio" name="payment_mode"   value="card" #card (change)="paymentMode(card.value)" [formControl]="form.controls['paymentMode']">
-                         <label class="radio-label">Card</label>
-                     </div>
-
-                     <div class="card-container" *ngIf="showCardDetails">
-
-                        <div>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Card Number</mat-label>
-                                <input matInput placeholder="0123XXXXXXXXX">
-                              </mat-form-field>
+                        <div *ngIf="listProducts.length === 0">
+                            <p style="text-align: center;">Your cart is currently empty. Browse our shop and find
+                                something special to add!</p>
                         </div>
-                        <div>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Name</mat-label>
-                                <input matInput placeholder="John Doe">
-                              </mat-form-field>
-                        </div>
-                        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" >
-                            <mat-form-field appearance="outline">
-                                <mat-label>Expiry Date(MM)</mat-label>
-                                <input matInput placeholder="08">
-                              </mat-form-field>
-                              <mat-form-field appearance="outline">
-                                <mat-label>Expiry Date(YYY)</mat-label>
-                                <input matInput placeholder="2025">
-                              </mat-form-field>
-                              <mat-form-field appearance="outline">
-                                <mat-label>CVV</mat-label>
-                                <input matInput placeholder="007">
-                              </mat-form-field>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-flat-button color="primary" class="pay-now-btn">Pay Now</button>
-                        </div>
-                     </div>
-
-                    </div>
-
-                    <div fxLayout="column">
-                        <button class="purchase-btn" (click)="confirmOrder()" [disabled]="!form.valid">Place Your Oder</button>
-                        <button class="shop-btn" (click)="navigateShop()">Back to shop</button>
                     </div>
                 </div>
-                
-            </div>
 
-        </div>
-    </section>
-</form>
+                <div>
+
+                    <div fxLayout="column" fxLayoutAlign="space-around">
+
+                        <div class="cont-1">
+
+                            <div>
+                                <div fxLayout="row wrap" fxLayoutAlign="space-between">
+                                    <h6>Overall Price</h6>
+                                    <p>${{overallPrice}}</p>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <h6>Discount</h6>
+                                    <p>${{discount}}</p>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <h6>Tax</h6>
+                                    <p>${{tax}}</p>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="space-between">
+                                    <h6 id="total-label">Total Price</h6>
+                                    <p id="total-value">${{totalCost}}</p>
+                                </div>
+                            </div>
+
+                            <div class="divider"></div>
+
+                            <h5>Shipping Details</h5>
+                            <div fxLayout="row wrap" fxLayout.xs="column" fxLayout.sm="column">
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Address</mat-label>
+                                    <input matInput placeholder="12X Street name"
+                                        [formControl]="form.controls['address']" maxLength="45">
+                                    <mat-error
+                                        *ngIf="(form.controls['address'].touched || form.controls['address'].untouched ) && form.controls['address'].hasError('required')">
+                                        Address field required
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>City</mat-label>
+                                    <input matInput placeholder="Chennai" [formControl]="form.controls['city']"
+                                        maxLength="25">
+                                    <mat-error
+                                        *ngIf="(form.controls['city'].touched || form.controls['city'].untouched ) && form.controls['city'].hasError('required')">
+                                        City field required
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Country</mat-label>
+                                    <input matInput placeholder="India" [formControl]="form.controls['country']"
+                                        maxLength="20">
+                                    <mat-error
+                                        *ngIf="(form.controls['country'].touched || form.controls['country'].untouched ) && form.controls['country'].hasError('required')">
+                                        Country field required
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>PhoneNumber</mat-label>
+                                    <input matInput placeholder="98777XXX" [formControl]="form.controls['phoneNumber']"
+                                        maxLength="15">
+                                    <mat-error
+                                        *ngIf="(form.controls['phoneNumber'].touched || form.controls['phoneNumber'].untouched ) && form.controls['phoneNumber'].hasError('required')">
+                                        Phone Number field required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="divider"></div>
+
+                            <h5>Payment Mode</h5>
+                            <div>
+                                <input type="radio" name="payment_mode" value="cash on delivery"
+                                    [formControl]="form.controls['paymentMode']" readonly="true">
+                                <label class="radio-label">Cash on Delivery</label>
+                            </div>
+
+                        </div>
+
+                        <div fxLayout="column">
+                            <button class="purchase-btn" (click)="confirmOrder()">Place Your
+                                Oder</button>
+                            <button class="shop-btn" (click)="navigateShop()">Back to shop</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </form>
 </body>

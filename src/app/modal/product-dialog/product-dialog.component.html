@@ -1,0 +1,32 @@
+<!-- product-dialog.component.html -->
+<mat-toolbar>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <h2>Preview</h2>
+        <mat-icon [mat-dialog-close]="true">close</mat-icon>
+    </div>
+</mat-toolbar>
+<div class="product-dialog">
+    <mat-dialog-content>
+        <div fxLayout="column" fxLayoutAlign="center center">
+            <img [src]="data.image" alt="{{ data.name }}" class="product-image">
+        </div>
+        <div class="product-details">
+            <h2>{{ data.name }}</h2>
+            <p class="description">{{ data.description }}</p>
+            <div class="details-container">
+                <p><strong>Price:</strong> {{ data.price ?  data.price : "Nil" }}</p>
+                <p><strong>Star:</strong> {{ data.star ? data.star : 'Nil' }}</p>
+                <p><strong>Total Rating:</strong> {{  data.totalRating ? data.totalRating : 'Nil' }}</p>
+                <p><strong>Discount:</strong> {{ data.discount ? data.discount : 'Nil' }}</p>
+                <p><strong>Size:</strong> {{  data.size ? data.size : 'Nil' }}</p>
+                <p><strong>Brand:</strong> {{ data.brand ? data.brand : 'Nil'}}</p>
+                <p><strong>Color:</strong> {{ data.color ? data.color : 'Nil'}}</p>
+                <p><strong>Connectivity:</strong> {{ data.connectivity ? data.connectivity : 'Nil' }}</p>
+                <p><strong>Compatibility:</strong> {{ data.compatibility ? data.compatibility : 'Nil'  }}</p>
+                <p><strong>Warranty:</strong> {{  data.warranty ? data.warranty : 'Nil' }}</p>
+                <p><strong>Dimensions:</strong> {{ data.dimensions ? data.dimensions : 'Nil' }}</p>
+                <p><strong>Weight:</strong> {{  data.weight ? data.weight : 'Nil' }}</p>
+            </div>
+        </div>
+    </mat-dialog-content>
+</div>

@@ -1,0 +1,36 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" closed>
+
+    <mat-toolbar>
+      <div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%;">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon id="side-nav-icon" class="menu-icon">menu</mat-icon>
+        </button>
+        <mat-icon class="close-icon" (click)="sidenav.close()">close</mat-icon>
+      </div>
+    </mat-toolbar>
+
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="account" (click)="sidenav.close()">My Account</a>
+      <a mat-list-item routerLink="products" (click)="sidenav.close()">Products</a>
+      <a mat-list-item routerLink="cart" (click)="sidenav.close()">Cart</a>
+      <a mat-list-item routerLink="orders" (click)="sidenav.close()">My Orders</a>
+      <a mat-list-item (click)="logout()">Logout</a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <mat-toolbar>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon class="menu-icon">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

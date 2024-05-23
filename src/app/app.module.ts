@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environment/environment';
 import { AngularFireModule} from '@angular/fire/compat'
 import { GiftosComponent } from './giftos/giftos.component';
@@ -14,6 +14,12 @@ import { CartProductsComponent } from './cart-products/cart-products.component';
 import { InMemoryCache } from './services/cache-services';
 import { OrderPlacedComponent } from './order-placed/order-placed.component';
 import { DatePipe } from '@angular/common';
+import { LoginComponent } from './login/login.component';
+import { MfaComponent } from './mfa/mfa.component';
+import { FullComponent } from './full/full.component';
+import { UserAccountComponent } from './user-account/user-account.component';
+import { UserOrdersComponent } from './user-orders/user-orders.component';
+import { ProductDialogComponent } from './modal/product-dialog/product-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +27,13 @@ import { DatePipe } from '@angular/common';
     GiftosComponent,
     ProductsComponent,
     CartProductsComponent,
-    OrderPlacedComponent
+    OrderPlacedComponent,
+    LoginComponent,
+    MfaComponent,
+    FullComponent,
+    UserAccountComponent,
+    UserOrdersComponent,
+    ProductDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +42,7 @@ import { DatePipe } from '@angular/common';
     AngularMaterialModule,
     FlexLayoutModule,
     ReactiveFormsModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [InMemoryCache,DatePipe],

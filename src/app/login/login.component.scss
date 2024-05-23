@@ -1,0 +1,144 @@
+.signup-btn,
+.login-btn {
+    padding: 15px 90px;
+    border: none;
+    font-size: 16px;
+    font-family: system-ui;
+    margin: 20px 0px;
+    cursor: pointer;
+}
+
+.login-btn {
+    background-color: #E5E5E5;
+    color: black;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.login-btn:hover {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #E5E5E5;
+    cursor: pointer;
+}
+
+.signup-btn:hover {
+    background-color: transparent;
+    border: 1px solid black;
+    color: black;
+}
+
+.signup-btn {
+    background-color: rgb(255 93 93);
+    color: white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.whole-container {
+    min-height: 100vh;
+    display: grid;
+    align-items: center;
+    place-content: center;
+}
+
+.inner-container {
+    padding: 40px;
+    border-radius: 25px;
+    margin: 20px;
+    background: #f6f6f6;
+}
+
+mat-form-field {
+    margin: 20px 0px 0px 0px;
+}
+
+.account-button {
+    margin: 20px 0px;
+    padding: 20px;
+    border-radius: 25px;
+    font-size: 18px;
+    background: #f75151;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.agreement-content {
+    font-size: 14px;
+    margin: 20px 5px 10px;
+    font-family: system-ui;
+}
+
+.account-button:hover {
+    background-color: transparent;
+    color: #f75151;
+    border: 1px solid #f75151;
+}
+
+svg {
+    position: relative;
+    top: 2px;
+    left: -8px;
+}
+
+
+mat-error {
+    margin: 7px -12px;
+}
+
+/* mat-form-field  style */
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+    border-radius: 15px;
+}
+
+@media screen and (max-width:680px) {
+
+    .signup-btn,
+    .login-btn {
+        padding: 15px 50px;
+    }
+
+    mat-error {
+        margin: 0px -12px;
+        font-size: 10px;
+    }
+
+    .agreement-content {
+        font-size: 12px;
+    }
+}
+
+.alert {
+    padding: 15px;
+    background-color: #f75151;
+    color: white;
+    margin: 20px 5px;
+    width: 90%;
+    font-size: 16px;
+    font-family: system-ui;
+    border-radius: 8px;
+}
+
+.login-cart {
+    display: none;
+}
+
+@media screen and (min-width:1200px) {
+
+    .login-cart {
+        display: block;
+    }
+
+    .image-content-container {
+        display: flex;
+        place-content: space-evenly;
+        margin: 35px 0px;
+    }
+
+    .login-form-container {
+        min-width: 140%;
+        position: relative;
+        left: -15px;
+    }
+}

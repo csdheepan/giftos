@@ -1,256 +1,313 @@
 <body>
-    <!-- navigation Bar -->
-    <nav>
-      <div class="menu">
-        <!-- Menu Button -->
-        <div class="show-menu">
-          <h1 class="giftos-title">GIFTOS</h1>
-          <button (click)="toggleSidenav()" class="menu-button" [ngClass]="{'close-icon': isMenuOpen}">
-            <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
-          </button>
-        </div>
-        <div [ngClass]="{'hide-list-item': !isMenuOpen }">
+  <!-- navigation Bar -->
+  <nav>
+    <div class="menu">
+
+      <!-- Menu Button -->
+      <div class="mobile-menu">
+        <h1 class="heading-title">SHOP-EASY</h1>
+        <button (click)="toggleSidenav()" class="menu-button" [ngClass]="{'close-icon': isMenuOpen}">
+          <mat-icon>{{ isMenuOpen ? 'close' : 'menu' }}</mat-icon>
+        </button>
+      </div>
+
+      <div [ngClass]="{'hide-desktop-menu': !isMenuOpen }">
+
+        <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column" fxLayout.sm="column"
+          fxLayoutGap="15px" style="margin: 0px 75px;">
+          <h1 class="large-title">SHOP-EASY</h1>
           <ul class="no-bullets">
-            <li> <a (click)="scrollToHome()">HOME</a></li>
-            <li> <a (click)="scrollToProduct()">SHOP</a></li>
-            <li> <a (click)="scrollToShop()">WHY US</a></li>
-            <li> <a (click)="scrollToTestimonial()">TESTIMONIAl</a></li>
-            <li> <a (click)="scrollToContact()">CONTACT</a></li>
-            <a (click)="navigateProducts()"><mat-icon>shopping_cart</mat-icon></a>
-            <a><mat-icon>search</mat-icon></a>
+            <li> <a (click)="scrollToHome()">Home</a></li>
+            <li> <a (click)="scrollToShop()">About</a></li>
+            <li> <a (click)="scrollToContact()">Contact</a></li>
+            <li> <a (click)="login()">Signup</a></li>
           </ul>
-        </div>
-      </div>
-    </nav>
-  
-  
-    <!-- landing section -->
-    <section #home>
-      <div class="whole-container">
-        <div>
-          <h1>Welcome To Our Gift Shop</h1>
-          <p>Discover unique gifts for every occasion. From personalized treasures to handmade delights, find the perfect
-            present for your loved ones. Whether it's a birthday, anniversary, or any special moment, our curated
-            collection has something special to make every occasion memorable.</p>
-          <p>Explore our wide range of products, carefully selected to bring joy and delight. Need assistance or have
-            special requests? Our friendly team is here to help you customize the perfect gift.</p>
-          <button mat-raised-button color="warn" class="customize-btn" (click)="scrollToContact()">Contact</button>
-        </div>
-  
-  
-        <div fxLayout="row" fxLayoutAlign="center center">
-          <img [src]="homePageImg" height="480px" class="home-image">
-        </div>
-      </div>
-    </section>
-  
-    <!-- product section -->
-    <section #product>
-      <h2>Latest Products</h2>
-      <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-        <div class="box" *ngFor="let product of listProducts">
-          <img [src]="product.image" width="150px" class="product-image">
-          <div class="price-details">
-            <p>{{product.name}}</p>
-            <p>price <span>{{product.price}}</span></p>
+
+          <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="center center">
+            <input type="search" class="search-field" placeholder="Are you looking for ?">
+            <mat-icon [ngClass]="{'liked': likedProduct}" (click)="handleLike('liked')">
+              {{  likedProduct ? 'favorite' : 'favorite_border'}}</mat-icon>
+            <mat-icon>shopping_cart</mat-icon>
           </div>
+
         </div>
+
       </div>
+
+    </div>
+
+  </nav>
+
+
+  <!-- landing section -->
+  <section #home>
+
+    <div class="whole-container">
+
+      <div>
+        <h1 class="content">Discover Your Perfect Style at ShopEase</h1>
+        <p class="content">Explore a world of endless possibilities at ShopEase. Find trendy fashion, home essentials,
+          and more.</p>
+        <p class="content">Need help or have a special request? Our team is here to make your shopping experience
+          seamless.</p>
+        <button mat-flat-button class="customize-btn" (click)="scrollToContact()">Get in Touch</button>
+      </div>
+
       <div fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="warn" class="customize-btn" (click)="navigateProducts()">View All Products</button>
+        <img [src]="homePageImg" height="480px" class="home-image">
       </div>
-    </section>
-  
-  
-    <!-- saving section -->
-    <section>
-      <div class="banner-container" id="saving-mode">
-        <div>
-          <img [src]="savingImage">
+
+    </div>
+
+  </section>
+
+  <!-- product section -->
+  <section #product>
+    <div>
+      <!-- Section Titles and Product Containers -->
+      <ng-container *ngFor="let section of sections">
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="product-title-container">
+          <h2>{{ section.title }}</h2>
         </div>
-        <div>
-          <h1>BEST SAVINGS ON NEW ARRIVALS</h1>
-          <p>Explore our exclusive collection of new arrivals and enjoy incredible savings.
-            From stylish apparel to must-have gadgets, we have something for everyone. Don't miss
-            out on these fantastic deals!</p>
-          <div>
-            <button mat-raised-button color="warn" class="buy-btn" id="s-btn">Buy Now</button>
-            <button mat-raised-button color="warn" class="more-btn" id="s-m-btn">See More</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- shopping section  -->
-    <section #shop>
-      <h2>Why Shop With Us</h2>
-      <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column" fxLayout.sm="column">
-        <div fxLayout="column" fxLayoutAlign="space-evenly center" class="box" *ngFor="let shop of shopPolicy">
-          <img [src]="shop.image" width="120px">
-          <div class="policy-details">
-            <p>{{shop.title}}</p>
-            <p class="description-text">{{shop.description}}</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-    <!-- Gift Section -->
-    <section>
-      <div class="banner-container" id="gift-mode">
-        <div>
-          <img [src]="giftImage">
-        </div>
-        <div>
-          <h1>GIFTS FOR YOUR LOVED ONES</h1>
-          <p>Find the perfect gift for your special someone. Explore our curated
-            selection of thoughtful presents, sure to bring joy to their day.</p>
-          <div>
-            <button mat-raised-button color="warn" class="buy-btn" id="g-btn">Buy Now</button>
-            <button mat-raised-button color="warn" class="more-btn" id="g-m-btn">See More</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  
-  
-    <!-- TESTIMONIAl SECTION -->
-    <section #testimonial>
-      <h2>TESTIMONIAL</h2>
-      <div class="testimonial-container" fxLayout="row" fxLayoutAlign="space-between center">
-        <div fxLayout="row" fxLayoutAlign="center center">
-          <button class="slide-btn" (click)="slidePrev()"><mat-icon
-              style="position: relative;left: 5px;">arrow_back_ios</mat-icon></button>
-        </div>
-        <div class="content-container">
-          <div fxLayout="row" fxLayoutAlign="space-between">
-            <div>
-              <p class="test-name">{{testimonials[currentIndex].name}}</p>
-              <p class="test-title">{{testimonials[currentIndex].position}}</p>
+
+        <div class="product-container">
+          <div class="box" *ngFor="let product of section.products">
+
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <span class="discount">{{product.discount}}</span>
+              <mat-icon [ngClass]="{'liked': product.likedProduct}" (click)="handleLike(product)">
+                {{  product.likedProduct ? 'favorite' : 'favorite_border'}}</mat-icon>
             </div>
-            <div>
-              <mat-icon class="quote-icon">format_quote</mat-icon>
+
+            <div fxLayout="row" fxLayoutAlign="center">
+              <img [src]="product.image" width="150px" class="product-image">
+            </div>
+
+            <div class="price-details">
+              <p>{{ product.name }}</p>
+              <span fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
+                <p>Price <span>{{ product.price }}</span></p>
+                <p class="actual-price">{{product.actualPrice}}</p>
+              </span>
+              <span fxLayout="row" fxLayoutAlign="center center">
+                <ng-container *ngFor="let star of generateStars(product.star)">
+                  <mat-icon class="star-icon">{{ star }}</mat-icon>
+                </ng-container>
+                <span> <strong>({{product.totalRating}})</strong></span>
+              </span>
             </div>
           </div>
-          <p class="test-words">{{testimonials[currentIndex].description}}</p>
         </div>
-        <div fxLayout="row" fxLayoutAlign="center center">
-          <button class="slide-btn" (click)="slideNext()"><mat-icon>arrow_forward_ios</mat-icon></button>
-        </div>
+      </ng-container>
+
+      <!-- View All Products Button -->
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="warn" class="customize-btn" (click)="login()">Buy Now</button>
       </div>
-  
-      <div class="slide-mobile-btn-container">
-        <button class="slide-mobile-btn" (click)="slidePrev()"><mat-icon
-          style="position: relative;left: 5px;">arrow_back_ios</mat-icon></button>
-        <button class="slide-mobile-btn" (click)="slideNext()"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div>
+
+  </section>
+
+
+  <!-- saving section -->
+  <section>
+    <div class="banner-container" id="saving-mode">
+      <div>
+        <img [src]="savingImage">
       </div>
-    </section>
-  
-  
-    <!-- Contact Section -->
-    <section #contact>
-      <h2>CONTACT</h2>
-      <div fxLayout="row wrap" fxLayoutAlign="space-evenly center" fxLayout.xs="column" fxLayout.sm="column">
-  
+      <div>
+        <h1>BEST SAVINGS ON NEW ARRIVALS</h1>
+        <p>Explore our exclusive collection of new arrivals and enjoy incredible savings.
+          From stylish apparel to must-have gadgets, we have something for everyone. Don't miss
+          out on these fantastic deals!</p>
         <div>
-          <img [src]="contactImg" width="300px" class="contact-img">
-        </div>
-  
-        <div>
-  
-          <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap.md="20px" fxLayoutGap.lg="40px"
-            fxLayoutGap.xl="50px">
-  
-            <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="your name">
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="your mail">
-            </mat-form-field>
-  
-          </div>
-  
-          <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap.md="20px" fxLayoutGap.lg="40px"
-            fxLayoutGap.xl="50px">
-  
-            <mat-form-field appearance="outline">
-              <mat-label>Phone Number</mat-label>
-              <input matInput placeholder="your phoneNumber">
-            </mat-form-field>
-  
-            <mat-form-field appearance="outline">
-              <mat-label>Message</mat-label>
-              <input matInput placeholder="your Message">
-            </mat-form-field>
-  
-          </div>
-  
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <button mat-flat-button color="warn" class="customize-btn">Send</button>
-          </div>
-  
-        </div>
-      
-      </div>
-    </section>
-  
-    <footer>
-      <div class="contact-section">
-  
-         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="45px">
-  
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
-          </svg>
-  
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
-            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334q.002-.211-.006-.422A6.7 6.7 0 0 0 16 3.542a6.7 6.7 0 0 1-1.889.518 3.3 3.3 0 0 0 1.447-1.817 6.5 6.5 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.32 9.32 0 0 1-6.767-3.429 3.29 3.29 0 0 0 1.018 4.382A3.3 3.3 0 0 1 .64 6.575v.045a3.29 3.29 0 0 0 2.632 3.218 3.2 3.2 0 0 1-.865.115 3 3 0 0 1-.614-.057 3.28 3.28 0 0 0 3.067 2.277A6.6 6.6 0 0 1 .78 13.58a6 6 0 0 1-.78-.045A9.34 9.34 0 0 0 5.026 15"/>
-          </svg>
-  
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
-          </svg>
-  
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
-            <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
-          </svg>
-  
-        </div>
-     
-      <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" class="footer-whole-container">
-        
-        <div>
-          <h2>About Us</h2>
-          <p> Our company is dedicated to providing high-quality products
-            and exceptional customer service. We believe in delivering unique and
-            thoughtful gifts for every occasion, curated with care and attention to detail.
-            Our team works tirelessly to ensure that your shopping experience is enjoyable and hassle-free.
-            With a wide selection of handcrafted treasures and personalized items, we aim to make every
-            moment special for you and your loved ones.</p>
-        </div>
-        <div class="letter-container">
-          <h2>Newsletter</h2>
-          <span>
-            <input type="email" class="email-field">
-            <button mat-flat-button color="warn" class="subscribe-btn">Subscribe</button>
-          </span>
-        </div>
-        <div>
-          <h2>Need a help ?</h2>
-          <p>If you have any questions or need assistance,
-            our customer support team is here to help. Reach out to us anytime!</p>
-        </div>
-        <div>
-          <h2>Contact Us</h2>
-          <p> <mat-icon> location_on</mat-icon> Gb road 123 london Uk</p>
-          <p> <mat-icon> phone</mat-icon> +01 12345678901</p>
-          <p> <mat-icon> email</mat-icon> mail@domain.com</p>
+          <button mat-flat-button color="warn" class="buy-btn" id="s-btn">Buy Now</button>
+          <button mat-flat-button color="warn" class="more-btn" id="s-m-btn">See More</button>
         </div>
       </div>
     </div>
-    </footer>
-  
-  </body>
+  </section>
+
+  <!-- shopping section  -->
+  <section #shop>
+    <h2>Why Shop With Us</h2>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column" fxLayout.sm="column">
+      <div fxLayout="column" fxLayoutAlign="space-evenly center" class="box" *ngFor="let shop of shopPolicy">
+        <img [src]="shop.image" width="120px">
+        <div class="policy-details">
+          <p>{{shop.title}}</p>
+          <p class="description-text">{{shop.description}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gift Section -->
+  <section>
+    <div class="banner-container" id="gift-mode">
+      <div>
+        <img [src]="giftImage">
+      </div>
+      <div>
+        <h1>GIFTS FOR YOUR LOVED ONES</h1>
+        <p>Find the perfect gift for your special someone. Explore our curated
+          selection of thoughtful presents, sure to bring joy to their day.</p>
+        <div>
+          <button mat-flat-button color="warn" class="buy-btn" id="g-btn">Buy Now</button>
+          <button mat-flat-button color="warn" class="more-btn" id="g-m-btn">See More</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TESTIMONIAl SECTION -->
+  <section #testimonial>
+    <h2>TESTIMONIAL</h2>
+    <div class="testimonial-container" fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button class="slide-btn" (click)="slidePrev()"><mat-icon
+            style="position: relative;left: 5px;">arrow_back_ios</mat-icon></button>
+      </div>
+      <div class="content-container">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <div>
+            <p class="test-name">{{testimonials[currentIndex].name}}</p>
+            <p class="test-title">{{testimonials[currentIndex].position}}</p>
+          </div>
+          <div>
+            <mat-icon class="quote-icon">format_quote</mat-icon>
+          </div>
+        </div>
+        <p class="test-words">{{testimonials[currentIndex].description}}</p>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button class="slide-btn" (click)="slideNext()"><mat-icon>arrow_forward_ios</mat-icon></button>
+      </div>
+    </div>
+
+    <div class="slide-mobile-btn-container">
+      <button class="slide-mobile-btn" (click)="slidePrev()"><mat-icon
+          style="position: relative;left: 5px;">arrow_back_ios</mat-icon></button>
+      <button class="slide-mobile-btn" (click)="slideNext()"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div>
+  </section>
+
+
+  <!-- Contact Section -->
+  <section #contact>
+    <h2>CONTACT</h2>
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center" fxLayout.xs="column" fxLayout.sm="column">
+
+      <div>
+        <img [src]="contactImg" width="300px" class="contact-img">
+      </div>
+
+      <div>
+
+        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap.md="20px" fxLayoutGap.lg="40px"
+          fxLayoutGap.xl="50px">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="your name">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="your mail">
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap.md="20px" fxLayoutGap.lg="40px"
+          fxLayoutGap.xl="50px">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input matInput placeholder="your phoneNumber">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Message</mat-label>
+            <input matInput placeholder="your Message">
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <button mat-flat-button color="warn" class="customize-btn">Send</button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="contact-section">
+
+      <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="45px">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook"
+          viewBox="0 0 16 16">
+          <path
+            d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951" />
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter"
+          viewBox="0 0 16 16">
+          <path
+            d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334q.002-.211-.006-.422A6.7 6.7 0 0 0 16 3.542a6.7 6.7 0 0 1-1.889.518 3.3 3.3 0 0 0 1.447-1.817 6.5 6.5 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.32 9.32 0 0 1-6.767-3.429 3.29 3.29 0 0 0 1.018 4.382A3.3 3.3 0 0 1 .64 6.575v.045a3.29 3.29 0 0 0 2.632 3.218 3.2 3.2 0 0 1-.865.115 3 3 0 0 1-.614-.057 3.28 3.28 0 0 0 3.067 2.277A6.6 6.6 0 0 1 .78 13.58a6 6 0 0 1-.78-.045A9.34 9.34 0 0 0 5.026 15" />
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram"
+          viewBox="0 0 16 16">
+          <path
+            d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube"
+          viewBox="0 0 16 16">
+          <path
+            d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z" />
+        </svg>
+
+      </div>
+
+      <div fxLayout="row wrap" fxLayout.xs="column" class="footer-whole-container" fxLayoutAlign="space-evenly">
+
+        <div class="letter-container">
+          <h2>Exculsive</h2>
+          <p>Subscribe</p>
+          <p>Get 10% off your first order</p>
+          <span>
+            <input type="email" class="email-field" placeholder="Enter your email">
+          </span>
+        </div>
+        <div>
+          <h2>Account</h2>
+          <p  (click)="login()">My Account</p>
+          <p  (click)="login()">Login/Register</p>
+          <p  (click)="login()">Cart</p>
+          <p  (click)="login()">Shop</p>
+        </div>
+        <div>
+          <h2>Quick Link</h2>
+          <p>Privacy Policy</p>
+          <p>Term of use</p>
+          <p>FAQ</p>
+          <p>Contact</p>
+        </div>
+
+        <div>
+          <h2>Contact Us</h2>
+          <p> <mat-icon> location_on</mat-icon> Gb Road Trichy,India</p>
+          <p> <mat-icon> phone</mat-icon> +91 6369452123</p>
+          <p> <mat-icon> email</mat-icon> emailservices13@gmail.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>

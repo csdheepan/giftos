@@ -1,0 +1,62 @@
+  <div class="orders-container">
+    <div *ngFor="let order of orders,index as i" class="order-card">
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar class="order-status-avatar"><mat-icon class="order-icon">shop</mat-icon></div>
+          <mat-card-title>{{ order.product.orderId }}</mat-card-title>
+          <mat-card-subtitle>{{ order.product.deliveryDate }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="order-info-card">
+                <mat-card>
+                  <mat-card-content>
+                    <div class="order-info">
+                      <p><mat-icon>receipt_long</mat-icon><strong> Order ID:</strong> {{ order.product.orderId }}</p>
+                      <p><mat-icon>event</mat-icon><strong> Order Date:</strong> {{ order.product.orderDate }}</p>
+                      <p><mat-icon>location_on</mat-icon><strong> Address:</strong> {{ order.product.address }}, {{ order.product.city }}, {{ order.product.country }}</p>
+                      <p><mat-icon>phone</mat-icon><strong> Phone:</strong> {{ order.product.phoneNumber }}</p>
+                      <p><mat-icon>attach_money</mat-icon><strong> Total Amount:</strong> {{ order.product.totalAmount | currency }}</p>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>              
+          <div class="order-products">
+            <div *ngFor="let product of order.product.products" class="product-card">
+              <img [src]="product.image" [alt]="product.name" class="product-image">
+              <div class="product-info">
+                <p class="product-name">{{ product.name }}</p>
+                <p class="product-price">{{ product.price }}</p>
+                <p class="product-discount">{{ product.discount }}</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="order-tracking">
+            <h3>Estimated Time Track</h3>
+            <div class="timeline">
+              <div *ngFor="let step of order.product.trackingSteps" class="timeline-step">
+                <div class="timeline-icon">
+                  <mat-icon>check_circle</mat-icon>
+                </div>
+                <div class="timeline-content">
+                  <p>{{ step.date }} - {{ step.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>          
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div *ngIf="orders.length === 0" class="empty-orders">
+      <h2>No Orders Yet!</h2>
+      <p>It looks like you haven't placed any orders with us. Start exploring our wide range of products and find something you love.</p>
+      <button (click)="navigateToProducts()">Browse Products</button>
+  </div>
+  
+
+
+  </div>
+  

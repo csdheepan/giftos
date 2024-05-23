@@ -1,0 +1,125 @@
+<div class="whole-container">
+
+    <div class="inner-container">
+
+        <!-- signup/login -->
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <button class="signup-btn" (click)="showSignupPage()">SignUp</button>
+            <button class="login-btn" (click)="showLoginPage()">Login</button>
+        </div>
+
+        <div class="image-content-container">
+
+
+            <img [src]="loginCart" width="40%" height="40%" class="login-cart">
+            <div *ngIf="signupPage">
+                <!-- signup form -->
+                <form [formGroup]="signupForm">
+
+                    <div fxLayout="column">
+
+                        <!-- Name -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>What Should we call you?</mat-label>
+                            <input matInput placeholder="Enter your profile name"
+                                [formControl]="signupForm.controls['profile']">
+                            <mat-error *ngIf="signupForm.controls['profile'].hasError('required') &&
+            (signupForm.controls['profile'].touched || signupForm.controls['profile'].untouched) ">UserName field
+                                required</mat-error>
+                            <mat-error *ngIf="signupForm.controls['profile'].hasError('pattern')">
+                                UserName field should conatin only alphabet with space</mat-error>
+                        </mat-form-field>
+
+                        <!-- email/username -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>What's your email?</mat-label>
+                            <input matInput placeholder="Enter your email id"
+                                [formControl]="signupForm.controls['email']"
+                                (blur)="checkValidation(signupForm.controls['email'].value)">
+                            <mat-error *ngIf="signupForm.controls['email'].hasError('required') &&
+            (signupForm.controls['email'].touched || signupForm.controls['email'].untouched ) ">Email address
+                                required</mat-error>
+                            <mat-error *ngIf="signupForm.controls['email'].hasError('email')">Invalid Email
+                                address</mat-error>
+                            <mat-error *ngIf="signupForm.controls['email'].hasError('emailExists')">Email Id already
+                                taken</mat-error>
+                        </mat-form-field>
+
+
+                        <!-- create password -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Create a Password</mat-label>
+                            <input matInput type="password" placeholder="Enter Your Password"
+                                [formControl]="signupForm.controls['passcode']" [type]="hide ? 'password' : 'text'">
+                            <mat-icon matSuffix style="cursor: pointer;" (click)="hide = !hide">
+                                {{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            <mat-error *ngIf="signupForm.controls['passcode'].hasError('required') &&
+            (signupForm.controls['passcode'].touched || signupForm.controls['passcode'].untouched) ">Password field
+                                required</mat-error>
+                            <mat-error *ngIf="signupForm.controls['passcode'].hasError('pattern')">Password must have
+                                atleast 8 chars with 1
+                                uppercase, 1 special char, and 1 number.
+                            </mat-error>
+                        </mat-form-field>
+
+                        <p class="agreement-content">By creating an account,you agree to the <strong>Term Use</strong>
+                            and
+                            <strong>Privacy Policy</strong>
+                        </p>
+
+                        <!-- Create a button -->
+                        <button class="account-button" (click)="userOnboard()">Create a account</button>
+
+                    </div>
+                </form>
+            </div>
+
+            <div *ngIf="loginPage">
+                <form [formGroup]="loginForm">
+
+                    <div fxLayout="column" class="login-form-container">
+
+                        <!-- show alert for Invalid Login Credentials  -->
+                        <div class="alert" *ngIf="showAlert">Invalid Login Credentials</div>
+
+
+                        <!-- Email field -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email address</mat-label>
+                            <input matInput placeholder="Enter your email address"
+                                [formControl]="loginForm.controls['userName']">
+                            <mat-error *ngIf="loginForm.controls['userName'].hasError('required') &&
+            (loginForm.controls['userName'].touched || loginForm.controls['userName'].untouched)">Email address
+                                required</mat-error>
+                            <mat-error *ngIf="loginForm.controls['userName'].hasError('email')">Invalid Email
+                                address</mat-error>
+                        </mat-form-field>
+
+                        <!-- Password -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" placeholder="Enter Your Password"
+                                [formControl]="loginForm.controls['password']" [type]="hide ? 'password' : 'text'">
+                            <mat-icon matSuffix style="cursor: pointer;" (click)="hide = !hide">
+                                {{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                            <mat-error *ngIf="loginForm.controls['password'].hasError('required') &&
+            (loginForm.controls['password'].touched || loginForm.controls['password'].untouched)">password field
+                                required</mat-error>
+                        </mat-form-field>
+
+                        <!-- Forgot password -->
+                        <div fxLayout="row" fxLayoutAlign="end">
+                            <p>Forgot your password?</p>
+                        </div>
+
+                        <!-- Login Button -->
+                        <button class="account-button" (click)="login()">Login</button>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,83 +1,74 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { InMemoryCache } from '../services/cache-services';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { signUp } from '../model/login-model';
+import { CartProductService } from '../services/cart-product.service';
+import { ProductService } from '../services/product.service';
+import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductDialogComponent } from '../modal/product-dialog/product-dialog.component';
+import { allProducts } from '../shared/all-products';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit{
-
-  listProducts :any []= [];
-  userProduct : any =[];
-  cloneProductList : any[]=[
-    { image: "assets/images/p1.png", name: "Ring", price: "$20" },
-    { image: "assets/images/p2.png", name: "Watch", price: "$35" },
-    { image: "assets/images/p3.png", name: "Teddy Bear", price: "$10" },
-    { image: "assets/images/p8.png", name: "Ring", price: "$45" },
-    { image: "assets/images/p9.png", name: "Shoes", price: "$45" },
-    { image: "assets/images/p10.png", name: "Shoes", price: "$30" },
-    { image: "assets/images/p11.png", name: "Chair", price: "$40" },
-    { image: "assets/images/p12.png", name: "Tablet", price: "$180" },
-    { image: "assets/images/p13.png", name: "Tv", price: "$450" },
-    { image: "assets/images/p14.png", name: "Laptop", price: "$560" },
-    { image: "assets/images/p4.png", name: "Flower Bouquet", price: "$20" },
-    { image: "assets/images/p5.png", name: "Teddy Bear", price: "$90" },
-    { image: "assets/images/p6.png", name: "Flower Bouquet", price: "$56" },
-    { image: "assets/images/p7.png", name: "Watch", price: "$80" },
-    { image: "assets/images/p15.png", name: "Men Wear", price: "$20" },
-    { image: "assets/images/p16.png", name: "Men Wear", price: "$90" },
-    { image: "assets/images/p17.png", name: "Men Wear", price: "$56" },
-    { image: "assets/images/p18.png", name: "Women Wear", price: "$80" },
-    { image: "assets/images/p19.png", name: "Women Wear", price: "$49" },
-  ];
+export class ProductsComponent implements OnInit {
 
 
-  cartCount: number = 0;
+  listProducts: any[] = [];
+  userProduct: any = [];
+  cloneProductList: any[] = allProducts;
+  userDetail !: signUp;
 
-  constructor(private router : Router,private store : InMemoryCache,private _snackBar: MatSnackBar){}
+  productSubscription !: Subscription;
+  
+
+  constructor(private store: InMemoryCache,private snackBar: MatSnackBar, private cartProductService: CartProductService,private productService : ProductService,private dialog : MatDialog) { }
 
 
   ngOnInit(): void {
-    let userProduct =  JSON.parse(this.store.getItem("USER_PRODUCT"));
-    this.cartCount = userProduct ? userProduct.length : 0;
 
-     // Initialize filteredProducts with listProducts array on component initialization
-     this.listProducts = [...this.cloneProductList];
+    this.userDetail = JSON.parse(this.store.getItem('USER_DETAILS'));
+
+   this.productSubscription = this.productService.getAllProducts(this.userDetail.id).subscribe((data:any)=>{
+
+      if(data.length != 0){
+        this.listProducts = data[0].product;
+      }
+      else{
+        this.productService.addProductitem(this.cloneProductList,this.userDetail.id);
+        this.listProducts = [...this.cloneProductList];
+      }
+
+      this.cartProductService.getCartProducts(this.userDetail.id).subscribe((data: any) => {
+
+        this.userProduct = data.length != 0 ? data[0].product : [];
+      })
+
+      this.productSubscription.unsubscribe();
+    });
+
   }
 
-  navigateHome(){
-    this.router.navigate(["home"])
-  }
 
-  navigateCart(){
-    this.router.navigate(["cart"])
-  }
 
-  addToCart(product: any){
-    this.cartCount++;
+  addToCart(product: any) {
 
-    let existingProduct = this.store.getItem('USER_PRODUCT');
-    if(existingProduct){
-       this.userProduct = JSON.parse(existingProduct);
-       this.userProduct.push(product);
-    }
-    else{
-      this.userProduct.push(product);
-    }
+    let userId = this.userDetail.id;
 
-    let userProduct = JSON.stringify(this.userProduct);
-    this.store.setItem('USER_PRODUCT',userProduct);
+    this.userProduct.push(product);
 
-    this._snackBar.open(`You've added a ${product.name} to your cart`, 'Close', {
+    this.cartProductService.addItem(this.userProduct, userId);
+
+    this.snackBar.open(`You've added a ${product.name} to your cart`, 'Close', {
       duration: 5000, //Duration in milliseconds (5 seconds)
-    }); 
-  
+    });
+
   }
 
-  serachProduct(searchValue:string){
+  serachProduct(searchValue: string) {
 
     if (searchValue && searchValue.trim() !== "") {
       // Filter the listProducts array based on the search value
@@ -89,4 +80,31 @@ export class ProductsComponent implements OnInit{
       this.listProducts = [...this.cloneProductList];
     }
   }
+
+  generateStars(rating: number): any[] {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < rating) {
+        stars.push('star'); // Filled star
+      } else {
+        stars.push('star_border'); // Empty star
+      }
+    }
+    return stars;
+  }
+
+  handleLike(value:any){  
+      
+    value.likedProduct = !value.likedProduct;
+
+    this.productService.addProductitem(this.listProducts, this.userDetail.id);
+  }
+
+
+  previewProduct(product:any){
+    this.dialog.open(ProductDialogComponent, {
+      data: product,
+      width:"80%"
+    });
+    }
 }
