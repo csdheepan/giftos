@@ -86,10 +86,10 @@ The application is hosted on Google Firebase.
 Link: [https://giftos-2bff5.web.app/](https://giftos-2bff5.web.app/)
 
 ## Functionality:
-- **Sign Up and Login:** Users can create accounts and log in.
-- **Posting Feed:** Users can share posts with the community.
-- **Following Friends:** Users can follow and stay updated on posts from friends.
-- **Avatar Customization:** Provide users the ability to change their avatars.
+- **User Registration and Login:** Users can create accounts and log in.
+- **Product Listings:** Users can view a list of products available for purchase, including details such as price, description, and images.
+- **Shopping Cart:** Users can add products to a shopping cart and proceed to checkout to complete their purchase.
+- **Order Management:**Users can view their order history, track the status of their orders, and manage returns or exchanges.
 - **Responsive Design:** The application is fully responsive for a seamless user experience.
 <!-- - **Preview the diagram for better understanding:** ![Application Functionality Diagram](src/assets/images/application-diagram.jpg) -->
 
