@@ -12,18 +12,29 @@
 
 
     <mat-nav-list>
-      <a mat-list-item routerLink="account" (click)="sidenav.close()">My Account</a>
-      <a mat-list-item routerLink="products" (click)="sidenav.close()">Products</a>
-      <a mat-list-item routerLink="cart" (click)="sidenav.close()">Cart</a>
-      <a mat-list-item routerLink="orders" (click)="sidenav.close()">My Orders</a>
-      <a mat-list-item (click)="logout()">Logout</a>
+      <a mat-list-item routerLink="account" (click)="sidenav.close()">
+        <mat-icon>account_circle</mat-icon> My Account
+      </a>
+      <a mat-list-item routerLink="products" (click)="sidenav.close()">
+        <mat-icon>storefront</mat-icon> Products
+      </a>
+      <a mat-list-item routerLink="cart" (click)="sidenav.close()">
+        <mat-icon>shopping_cart</mat-icon> Cart
+      </a>
+      <a mat-list-item routerLink="orders" (click)="sidenav.close()">
+        <mat-icon>assignment</mat-icon> My Orders
+      </a>
+      <a mat-list-item (click)="openLogout()">
+        <mat-icon>logout</mat-icon> Logout
+      </a>
+      
     </mat-nav-list>
 
   </mat-sidenav>
   <mat-sidenav-content>
 
     <mat-toolbar>
-      <button mat-icon-button (click)="sidenav.toggle()">
+      <button *ngIf="!sidenav.opened" mat-icon-button (click)="sidenav.toggle()">
         <mat-icon class="menu-icon">menu</mat-icon>
       </button>
     </mat-toolbar>

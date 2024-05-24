@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GiftosComponent } from './giftos/giftos.component';
 import { ProductsComponent } from './products/products.component';
-import { CartProductsComponent } from './cart-products/cart-products.component';
 import { OrderPlacedComponent } from './order-placed/order-placed.component';
 import { LoginComponent } from './login/login.component';
 import { MfaComponent } from './mfa/mfa.component';
@@ -10,6 +9,8 @@ import { FullComponent } from './full/full.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { AuthGuard} from './guard/auth.guard'
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CartProductsComponent } from './cart-products/cart-products.component';
 
 const routes: Routes = [
   {
@@ -60,7 +61,8 @@ const routes: Routes = [
       }
     ]
   },
-
+  {path: '404', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

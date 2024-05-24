@@ -29,13 +29,18 @@
   .save-button{
     padding: 15px 65px;
     background: #f75151;
-    border: none;
+    border: 1px solid #f75151;
     color: white;
     border-radius: 5px;
     font-family: system-ui;
     font-size: 16px;
+    cursor: pointer;
   }
 
+  .save-button:hover{
+    background: transparent;
+    color: #f75151;
+  }
 //   button{
 //     margin: 30px 0px 0px;
 //   }

@@ -14,7 +14,7 @@
       <div [ngClass]="{'hide-desktop-menu': !isMenuOpen }">
 
         <div fxLayout="row" fxLayoutAlign="space-between center" fxLayout.xs="column" fxLayout.sm="column"
-          fxLayoutGap="15px" style="margin: 0px 75px;">
+          fxLayoutGap="15px" class="toolbar-container">
           <h1 class="large-title">SHOP-EASY</h1>
           <ul class="no-bullets">
             <li> <a (click)="scrollToHome()">Home</a></li>
@@ -27,7 +27,7 @@
             <input type="search" class="search-field" placeholder="Are you looking for ?">
             <mat-icon [ngClass]="{'liked': likedProduct}" (click)="handleLike('liked')">
               {{  likedProduct ? 'favorite' : 'favorite_border'}}</mat-icon>
-            <mat-icon>shopping_cart</mat-icon>
+            <mat-icon (click)="login()">shopping_cart</mat-icon>
           </div>
 
         </div>

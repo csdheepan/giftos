@@ -5,7 +5,8 @@
 }
 
 .order-card {
-  margin-bottom: 20px;
+  max-width: 60%;
+  margin: auto;
 }
 
 .mat-card {
@@ -228,7 +229,7 @@ button {
   margin-right: 5px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 680px) {
 
   .order-info mat-icon {
     display: none;
@@ -236,6 +237,10 @@ button {
 
   .order-info p {
     font-size: 0.8em !important;
+  }
+
+  .order-card {
+    max-width: 90%;
   }
 }
 

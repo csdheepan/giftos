@@ -1,0 +1,148 @@
+/* not-found.component.css */
+
+.whole-body{
+    background-color: white;
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    max-width: 60%;
+    margin: auto;
+  }
+  
+  .error-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  p {
+    font-family: system-ui;
+    margin: 0.5em 0;
+    font-weight: bold;
+  }
+  
+  .home-button {
+    display: inline-block;
+    margin-top: 2em;
+    padding: 0.5em 1em;
+    background-color: #f75151;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid #f75151;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .home-button:hover {
+    background-color: transparent;
+    color: #f75151;
+  }
+  
+  @media screen and (min-width: 100px) and (max-width : 480px) {
+  
+    p {
+      font-size: 12px;
+      line-height: 1.70em;
+    }
+  
+    .page404 {
+      max-width: 75%;
+    }
+  
+    .home-button {
+      font-size: 12px;
+      height: 30px;
+      width: 105px;
+  
+  
+    }
+    .container {
+     padding-top: 100px;
+    }
+  }
+  
+  @media screen and (min-width: 480px) and (max-width : 980px) {
+  
+    p {
+      font-size: 16px;
+      line-height: 1.75em;
+    }
+  
+    .home-button {
+      width: 160px;
+      font-size: 15px;
+      height: 41px;
+    }
+  
+    .page404 {
+      max-width: 60%;
+    }
+    .container {
+      padding-top: 50px;
+     }
+  }
+  
+  
+  @media only screen and (min-width:980px) and (max-width:1800px) {
+    p {
+      font-size: 22px;
+      line-height: 1.85em;
+    }
+  
+    .page404 {
+      max-width: 55%;
+    }
+  
+    .home-button {
+      width: 160px;
+      font-size: 15px;
+      height: 41px;
+    }
+  }
+  
+  @media only screen and (min-width:1800px) and (max-width:3200px) {
+    p {
+      font-size: 26px;
+      line-height: 1.90em;
+    }
+  
+    .page404 {
+      max-width: 50%;
+    }
+  
+    .home-button {
+      width: 185px;
+      font-size: 20px;
+      height: 60px;
+    }
+  }
+  
+  @media only screen and (min-width:3200px) {
+    p {
+      font-size: 40px;
+      line-height: 1.95em;
+    }
+  
+    .page404 {
+      max-width: 50%;
+    }
+  
+    .home-button {
+      width: 215px;
+      font-size: 24px;
+      height: 85px;
+    }
+  }
+  
+  
+  
+  .img-container {
+    display: flex;
+    place-content: center;
+  }

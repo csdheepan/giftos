@@ -10,7 +10,6 @@ import { environment } from 'src/environment/environment';
 import { AngularFireModule} from '@angular/fire/compat'
 import { GiftosComponent } from './giftos/giftos.component';
 import { ProductsComponent } from './products/products.component';
-import { CartProductsComponent } from './cart-products/cart-products.component';
 import { InMemoryCache } from './services/cache-services';
 import { OrderPlacedComponent } from './order-placed/order-placed.component';
 import { DatePipe } from '@angular/common';
@@ -20,6 +19,9 @@ import { FullComponent } from './full/full.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserOrdersComponent } from './user-orders/user-orders.component';
 import { ProductDialogComponent } from './modal/product-dialog/product-dialog.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LogoutComponent } from './modal/logout/logout.component';
+import { CartProductsComponent } from './cart-products/cart-products.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ProductDialogComponent } from './modal/product-dialog/product-dialog.co
     UserAccountComponent,
     UserOrdersComponent,
     ProductDialogComponent,
+    PageNotFoundComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

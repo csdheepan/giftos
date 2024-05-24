@@ -1,0 +1,17 @@
+mat-icon{
+    transform: scale(1.5);
+    margin: -5px 15px;
+    position: relative;
+    top: 5px;
+}
+
+mat-toolbar{
+    background-color: #f75151;
+    color: white;
+}
+
+@media screen and (max-width:480px){
+    mat-icon{
+       display: none;
+    }
+}

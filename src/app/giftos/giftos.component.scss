@@ -116,6 +116,10 @@ ul.no-bullets {
   white-space: nowrap;
 }
 
+.toolbar-container{
+  margin: 0px 75px;
+}
+
 
 /* menu for mobile */
 @media only screen and (max-width: 960px) {
@@ -153,6 +157,11 @@ ul.no-bullets {
   .large-title {
     display: none;
   }
+
+  
+.toolbar-container{
+  margin: 0px 75px 25px 75px;
+}
 
   //styles savings and gifts.
   section .banner-container {
@@ -531,7 +540,7 @@ footer svg {
   }
 
   .box {
-    margin: 0px 15px;
+    margin: 15px;
     padding: 10px 20px;
   }
 

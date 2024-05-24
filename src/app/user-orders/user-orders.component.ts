@@ -22,7 +22,7 @@ export class UserOrdersComponent  implements OnInit{
     this.userDetail = JSON.parse(this.store.getItem('USER_DETAILS'));
 
     this.placedProductService.getPlacedProduct(this.userDetail.id).subscribe((data:Order[])=>{
-      this.orders = data
+      this.orders = data;
     })
   }
 

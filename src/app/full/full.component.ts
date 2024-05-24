@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { InMemoryCache } from '../services/cache-services';
+import { LogoutComponent } from '../modal/logout/logout.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-full',
@@ -10,10 +10,11 @@ import { InMemoryCache } from '../services/cache-services';
 export class FullComponent {
 
 
-  constructor(private router: Router, private store: InMemoryCache) { }
+  constructor(private dialog : MatDialog) { }
 
-  logout() {
-    this.store.clear();
-    this.router.navigate(['']);
+  openLogout() {
+    this.dialog.open(LogoutComponent,{
+      disableClose: true
+    })
   }
 }

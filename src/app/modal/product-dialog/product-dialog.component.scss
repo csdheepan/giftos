@@ -41,6 +41,10 @@
     background-color: #f75151;
     color: white;
   }
+
+  mat-icon{
+    cursor: pointer;
+  }
   
   @media screen and (max-width: 600px) {
     .product-dialog {
