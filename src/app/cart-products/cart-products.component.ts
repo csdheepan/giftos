@@ -3,7 +3,7 @@ import { InMemoryCache } from '../services/cache-services';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { signUp } from '../model/login-model';
+import { SignUp } from '../model/login-model';
 import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,7 +23,7 @@ export class CartProductsComponent implements OnInit {
   tax !: any;
   totalCost !: any;
   form: FormGroup = Object.create(null);
-  userDetail !: signUp;
+  userDetail !: SignUp;
   subscription !: Subscription;
 
   constructor(private store: InMemoryCache, private router: Router, private fb: FormBuilder, private datePipe: DatePipe

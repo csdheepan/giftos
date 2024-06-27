@@ -1,10 +1,15 @@
 
 
 
-export class signUp{
+export class SignUp{
 
     profile !: string;
     email !: string;
-    password !: string;
+    passcode !: string;
     id !: string;
+}
+
+export class Login{
+    userName !: string;
+    password !: string; 
 }

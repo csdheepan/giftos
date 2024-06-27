@@ -1,25 +1,34 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { signUp } from '../model/login-model';
+import { SignUp } from '../model/login-model';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
+  private readonly collectionPath = '/register';
+
   constructor(private afs: AngularFirestore) { }
 
-  userSignUp(signUp:signUp) {
+  /**
+   * Registers a new user by storing their information in Firestore.
+   * @param signUpData - The user data to be registered.
+   * @returns An Observable that completes when the user data has been stored.
+   */
+  userSignUp(signUpData: SignUp): Observable<void> {
+    const id = this.afs.createId();
+    signUpData.id = id;
 
-    const id = this.afs.createId(); // Generate a ID
-    signUp.id = id;
-
-    // Use set to store the data with the  document ID
-    this.afs.collection('/register').doc(id).set(signUp);
+    return from(this.afs.collection(this.collectionPath).doc(id).set(signUpData))
   }
 
-  getRegisterUser() {
-    return this.afs.collection('/register').valueChanges()
+  /**
+   * Retrieves all registered users from Firestore.
+   * @returns An Observable containing an array of user data.
+   */
+  getRegisterUser(): Observable<SignUp[]> {
+    return this.afs.collection<SignUp>(this.collectionPath).valueChanges();
   }
-
 }

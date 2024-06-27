@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
-import { signUp } from '../model/login-model';
+import { Login, SignUp } from '../model/login-model';
 import { InMemoryCache } from '../services/cache-services';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,136 +13,128 @@ import { InMemoryCache } from '../services/cache-services';
 })
 export class LoginComponent implements OnInit {
 
-  signupPage: boolean = true;
-  loginPage: boolean = false;
-  signupForm: FormGroup = Object.create(null);
-  loginForm: FormGroup = Object.create(null);
-  showAlert: boolean = false;
-  hide: boolean = true;
-  loginCart = 'assets/images/login-cart.png'
+  signupPage = true;
+  loginPage = false;
+  signupForm: FormGroup = this.fb.group(Object.create(null));
+  loginForm: FormGroup = this.fb.group(Object.create(null));
+  showAlert = false;
+  hide = true;
+  loader = false;
+  showLoginButton = true;
+  showSignupButton = true;
+  loginCart = 'assets/images/login-cart.png';
+  signupDetails !: SignUp;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router, private store: InMemoryCache) { }
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router,
+    private store: InMemoryCache
+  ) {}
 
   ngOnInit(): void {
-
-    //intalize signup form
-    this.signupForm = this.fb.group({
-      "profile": [null, Validators.compose([Validators.required,Validators.pattern('[a-zA-Z ]*')])],
-      "email": [null, Validators.compose([Validators.required])],
-      "passcode": [null, Validators.compose([Validators.required, Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*[0-9]).{8,}$/)])],
-    })
-
-    //intalize login form
-    this.loginForm = this.fb.group({
-      "userName": [null, Validators.compose([Validators.required, Validators.email])],
-      "password": [null, Validators.compose([Validators.required])],
-    })
+    this.initializeForms();
   }
 
-  showSignupPage() {
+  private initializeForms(): void {
+    this.signupForm = this.createSignupForm();
+    this.loginForm = this.createLoginForm();
+  }
+
+  private createSignupForm(): FormGroup {
+    return this.fb.group({
+      profile: [null, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      email: [null, [Validators.required, Validators.email]],
+      passcode: [null, [Validators.required,Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*[0-9]).{8,}$/)
+      ]]
+    });
+  }
+
+  private createLoginForm(): FormGroup {
+    return this.fb.group({
+      userName: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]]
+    });
+  }
+
+  showSignupPage(): void {
     this.signupPage = true;
     this.loginPage = false;
     this.showAlert = false;
     this.resetForm();
   }
 
-  showLoginPage() {
+  showLoginPage(): void {
     this.signupPage = false;
     this.loginPage = true;
     this.showAlert = false;
     this.resetForm();
   }
 
-  login() {
+  login(): void {
+    if (this.loginForm.invalid) return;
 
-    if (this.loginForm.valid) {
+    this.showLoginButton = false;
+    this.loader = true;
 
-      //retrieve all register user details.
-      this.loginService.getRegisterUser().subscribe((data: any[]) => {
-
-        // Extract login details from the form
-        const loginDetails = {
-          userName: this.loginForm.controls['userName'].value,
-          password: this.loginForm.controls['password'].value
-        };
-
-        // Iterate through the array of registered users
-        for (const user of data) {
-
+    setTimeout(() => {
+      this.loginService.getRegisterUser().pipe(take(1)).subscribe((data: SignUp[]) => {
+        this.showLoginButton = true;
+        this.loader = false;
+        const loginDetails:Login = this.loginForm.value;
+        const user = data.find(user => user.email === loginDetails.userName && user.passcode === loginDetails.password);
+        if (user) {
+          console.log("Login Sucessfully");
           this.showAlert = false;
-
-          // Check if the email and password match ie user all already logged in.
-          if (user.email === loginDetails.userName && user.password === loginDetails.password) {
-            console.log('Login successful');
-
-            let userDetails = JSON.stringify(user)
-            this.store.setItem("USER_DETAILS", userDetails)
-
-            this.router.navigate(['mfa'],{ queryParams: { userName: this.loginForm.controls['userName'].value}})
-            return;
-          }
-
-          // If no match found ie login details are anot valid / not registered.
-          else {
-            console.log('Invalid login credentials');
-            this.showAlert = true;
-          }
+          this.store.setItem("USER_DETAILS", JSON.stringify(user));
+          this.router.navigate(['mfa'], { queryParams: { userName: this.loginForm.controls['userName'].value } }); 
+        } else {
+          console.log("Invalid Login Crendials");
+          this.showAlert = true;
         }
+      },(err:any)=>{
+        this.showLoginButton = true;
+        this.loader = false;
+        console.log("Login Falied");
       });
-    }
+    }, 1000);
   }
 
-
-  //method for to restrict user to resitered using same email id.
-  checkValidation(value: string) {
-    let email = value ? value : "";
-
-    if (email != "" && this.signupForm.controls['email'].valid) {
-
-      //get all register details.
-      this.loginService.getRegisterUser().subscribe((data: any) => {
-
-        // check email id already exist or not using some method (Js method).
-        let emailExists = data.some((user: any) => user.email === email);
-
+  checkValidation(email: string): void {
+    if (email && this.signupForm.controls['email'].valid) {
+      this.loginService.getRegisterUser().pipe(take(1)).subscribe((data: SignUp[]) => {
+        const emailExists = data.some(user => user.email === email);
         if (emailExists) {
-          // Set an error for the email form control if email already exist.
           this.signupForm.controls['email'].setErrors({ 'emailExists': true });
         }
       });
     }
   }
 
+  signUp(): void {
+    if (this.signupForm.invalid) return;
 
+     this.signupDetails = this.signupForm.value;
+    this.signupDetails.id = "";
 
-
-  userOnboard() {
-
-    if (this.signupForm.valid) {
-
-      this.signupPage = false;
-      this.loginPage = true;
-
-      let payload: signUp = {
-        'profile': this.signupForm.controls['profile'].value,
-        'email': this.signupForm.controls['email'].value,
-        'password': this.signupForm.controls['passcode'].value,
-        'id': ""
-      }
-
-      this.loginService.userSignUp(payload);
-    }
-
+    this.showSignupButton = false;
+    this.loader = true;
+    setTimeout(() => {
+      this.loginService.userSignUp(this.signupDetails).subscribe(() => {
+        this.showSignupButton = true;
+        this.loader = false;
+        this.showLoginPage();
+      },
+    (err:any)=>{
+      console.log("Signup Falied");
+      this.showSignupButton = true;
+      this.loader = false;
+    });
+    }, 1000);
   }
 
-
-  //reused method
-  resetForm() {
+  resetForm(): void {
     this.signupForm.reset();
     this.loginForm.reset();
-    this.signupForm.clearValidators();
-    this.signupForm.updateValueAndValidity();
-    this.loginForm.clearValidators();
-    this.loginForm.updateValueAndValidity();
   }
 }

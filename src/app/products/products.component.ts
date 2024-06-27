@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InMemoryCache } from '../services/cache-services';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { signUp } from '../model/login-model';
+import { SignUp } from '../model/login-model';
 import { CartProductService } from '../services/cart-product.service';
 import { ProductService } from '../services/product.service';
 import { Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
   listProducts: any[] = [];
   userProduct: any = [];
   cloneProductList: any[] = allProducts;
-  userDetail !: signUp;
+  userDetail !: SignUp;
 
   productSubscription !: Subscription;
   

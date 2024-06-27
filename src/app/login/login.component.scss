@@ -56,12 +56,20 @@ mat-form-field {
 .account-button {
     margin: 20px 0px;
     padding: 20px;
-    border-radius: 25px;
+    border-radius: 10px;
     font-size: 18px;
     background: #f75151;
     color: white;
     border: none;
     cursor: pointer;
+}
+
+.loader::ng-deep circle {
+    stroke: #f75151 !important;
+}
+
+mat-spinner {
+    margin: 20px 0px;
 }
 
 .agreement-content {
@@ -87,16 +95,12 @@ mat-error {
     margin: 7px -12px;
 }
 
-/* mat-form-field  style */
-:host ::ng-deep .mat-mdc-text-field-wrapper {
-    border-radius: 15px;
-}
-
 @media screen and (max-width:680px) {
 
     .signup-btn,
     .login-btn {
-        padding: 15px 50px;
+        padding: 12px 65px;
+        font-size: 14px;
     }
 
     mat-error {
@@ -106,6 +110,17 @@ mat-error {
 
     .agreement-content {
         font-size: 12px;
+    }
+
+    .inner-container {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    .account-button {
+        margin: 20px 0px;
+        padding: 15px;
+        font-size: 14px;
     }
 }
 
