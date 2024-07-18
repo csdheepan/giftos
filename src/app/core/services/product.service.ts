@@ -10,7 +10,7 @@ export class ProductService {
   constructor(private afs: AngularFirestore) { }
 
 
-  addProductitem(allProducts: any, id: string) {
+  addProductItem(allProducts: any, id: string) {
 
     // Reference to the 'Cart Products' object field under the user's document
     const cartProductsRef = this.afs.collection(`register/${id}/All Products`).doc(id);

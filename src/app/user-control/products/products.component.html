@@ -1,26 +1,25 @@
 <body>
+  <div class="search-container">
+    <input type="text" placeholder="Search Products" (keyup)="searchProduct(product.value)" #product>
+    <select>
+      <option>Phone</option>
+      <option>Laptop</option>
+      <option>Tv</option>
+      <option>Electronics</option>
+    </select>
+    <button>
+      <mat-icon class="search-icon">search</mat-icon>
+    </button>
+  </div>
 
-    <div class="search-container">
-        <input type="text" placeholder="Search Products" (keyup)="serachProduct(product.value)" #product>
-        <select>
-          <option>Phone</option>
-          <option>Laptop</option>
-          <option>Tv</option>
-          <option>Electronics</option>
-        </select>
-        <button>
-          <mat-icon class="search-icon">search</mat-icon>
-        </button>
-      </div>      
-      
-<section>
-  <div>
+  <section>
+    <div>
       <div class="product-container">
         <div class="box" *ngFor="let product of listProducts">
-
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <mat-icon [ngClass]="{'liked': product.likedProduct}" (click)="handleLike(product)">
-              {{  product.likedProduct ? 'favorite' : 'favorite_border'}}</mat-icon>
+              {{ product.likedProduct ? 'favorite' : 'favorite_border' }}
+            </mat-icon>
             <mat-icon (click)="previewProduct(product)">remove_red_eye</mat-icon>
           </div>
 
@@ -32,13 +31,13 @@
             <p>{{ product.name }}</p>
             <span fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="20px">
               <p>Price <span>{{ product.price }}</span></p>
-              <p class="actual-price">{{product.actualPrice}}</p>
+              <p class="actual-price">{{ product.actualPrice }}</p>
             </span>
             <span fxLayout="row" fxLayoutAlign="center center">
               <ng-container *ngFor="let star of generateStars(product.star)">
                 <mat-icon class="star-icon">{{ star }}</mat-icon>
               </ng-container>
-              <span> <strong>({{product.totalRating}})</strong></span>
+              <span> <strong>({{ product.totalRating }})</strong></span>
             </span>
             <div>
               <button class="add-cart-btn" (click)="addToCart(product)">Add Cart</button>
@@ -46,7 +45,6 @@
           </div>
         </div>
       </div>
-  </div>
-</section>
-
+    </div>
+  </section>
 </body>

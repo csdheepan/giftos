@@ -15,89 +15,77 @@ import { ProductDialogComponent } from '../modal/product-dialog/product-dialog.c
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-
-
   listProducts: any[] = [];
-  userProduct: any = [];
+  userProduct: any[] = [];
   cloneProductList: any[] = allProducts;
-  userDetail !: SignUp;
-  debounceTimer!:any
-  productSubscription !: Subscription;
-  
+  userDetail!: SignUp;
+  debounceTimer!: any;
+  productSubscription!: Subscription;
+
   @HostListener('document:mousewheel', ['$event'])
-  onDocumentMousewheelEvent(event:Event) {
- 
-    if(this.debounceTimer){
-      clearInterval(this.debounceTimer)
-    }
+  onDocumentMousewheelEvent(event: Event) {
     
-  this.debounceTimer= setTimeout(() => {
-    const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const clientHeight = document.documentElement.clientHeight;
-
-    if (scrollTop + clientHeight >= scrollHeight) {
-      // console.log("load data from infinite scroll");
-      // this.loadAddCartProducts();
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
     }
-   }, 500);
-}
 
-  constructor(private store: InMemoryCache,private snackBar: MatSnackBar, private cartProductService: CartProductService,private productService : ProductService,private dialog : MatDialog) { }
+    this.debounceTimer = setTimeout(() => {
+      const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
 
-  loadAddCartProducts(){
-    this.listProducts.push(...this.listProducts)
+      if (scrollTop + clientHeight >= scrollHeight) {
+        console.log("load data from Infinte scroll")
+        // this.loadAddCartProducts();
+      }
+    }, 500);
   }
 
-  ngOnInit(): void {
+  constructor(
+    private store: InMemoryCache,
+    private snackBar: MatSnackBar,
+    private cartProductService: CartProductService,
+    private productService: ProductService,
+    private dialog: MatDialog
+  ) {}
 
+  ngOnInit(): void {
     this.userDetail = JSON.parse(this.store.getItem('USER_DETAILS'));
 
-   this.productSubscription = this.productService.getAllProducts(this.userDetail.id).subscribe((data:any)=>{
-
-      if(data.length != 0){
+    this.productSubscription = this.productService.getAllProducts(this.userDetail.id).subscribe((data: any) => {
+      if (data.length !== 0) {
         this.listProducts = data[0].product;
-      }
-      else{
-        this.productService.addProductitem(this.cloneProductList,this.userDetail.id);
+      } else {
+        this.productService.addProductItem(this.cloneProductList, this.userDetail.id);
         this.listProducts = [...this.cloneProductList];
       }
 
       this.cartProductService.getCartProducts(this.userDetail.id).subscribe((data: any) => {
-
-        this.userProduct = data.length != 0 ? data[0].product : [];
-      })
+        this.userProduct = data.length !== 0 ? data[0].product : [];
+      });
 
       this.productSubscription.unsubscribe();
     });
-
   }
 
-
+  loadAddCartProducts() {
+    this.listProducts.push(...this.cloneProductList);
+  }
 
   addToCart(product: any) {
-
-    let userId = this.userDetail.id;
-
     this.userProduct.push(product);
-
-    this.cartProductService.addItem(this.userProduct, userId);
-
+    this.cartProductService.addItem(this.userProduct, this.userDetail.id);
     this.snackBar.open(`You've added a ${product.name} to your cart`, 'Close', {
-      duration: 5000, //Duration in milliseconds (5 seconds)
+      duration: 5000 // Duration in milliseconds (5 seconds)
     });
-
   }
 
-  serachProduct(searchValue: string) {
-
-    if (searchValue && searchValue.trim() !== "") {
-      // Filter the listProducts array based on the search value
+  searchProduct(searchValue: string) {
+    if (searchValue && searchValue.trim() !== '') {
       this.listProducts = this.cloneProductList.filter(product =>
         product.name.toLowerCase().includes(searchValue.toLowerCase())
       );
     } else {
-      // If search value is empty, display all products
       this.listProducts = [...this.cloneProductList];
     }
   }
@@ -105,27 +93,20 @@ export class ProductsComponent implements OnInit {
   generateStars(rating: number): any[] {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      if (i < rating) {
-        stars.push('star'); // Filled star
-      } else {
-        stars.push('star_border'); // Empty star
-      }
+      stars.push(i < rating ? 'star' : 'star_border');
     }
     return stars;
   }
 
-  handleLike(value:any){  
-      
-    value.likedProduct = !value.likedProduct;
-
-    this.productService.addProductitem(this.listProducts, this.userDetail.id);
+  handleLike(product: any) {
+    product.likedProduct = !product.likedProduct;
+    this.productService.addProductItem(this.listProducts, this.userDetail.id);
   }
 
-
-  previewProduct(product:any){
+  previewProduct(product: any) {
     this.dialog.open(ProductDialogComponent, {
       data: product,
-      width:"80%"
+      width: '80%'
     });
-    }
+  }
 }

@@ -15,7 +15,11 @@ export class UserOrdersComponent  implements OnInit{
   orders: Order[] = [];
   userDetail : any;
  
-  constructor(private placedProductService : PlacedProductService,private store : InMemoryCache,private router : Router){}
+  constructor(
+    private placedProductService : PlacedProductService,
+    private store : InMemoryCache,
+    private router : Router
+  ){}
 
   ngOnInit(): void {
 

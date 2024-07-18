@@ -1,129 +1,128 @@
-<mat-card class="user-details-card">
-
-    <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
-        <mat-icon>account_circle</mat-icon>
-        <h2>User Details</h2>
-    </div>
-    <mat-card-content>
-        <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
-            <div fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center">
-                <div>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>First Name</mat-label>
-                        <input matInput formControlName="firstName">
-                        <mat-error *ngIf="userDetailsForm.controls['firstName'].hasError('required') &&
-                        (userDetailsForm.controls['firstName'].touched || userDetailsForm.controls['firstName'].untouched) ">
-                        FirstName field required</mat-error> 
-                        <mat-error *ngIf="userDetailsForm.controls['firstName'].hasError('pattern')">
-                        Only Alphabets with space</mat-error>    
-                </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Last Name</mat-label>
-                        <input matInput formControlName="lastName">
-                        <mat-error *ngIf="userDetailsForm.controls['lastName'].hasError('required') &&
-                        (userDetailsForm.controls['lastName'].touched || userDetailsForm.controls['lastName'].untouched) ">
-                        LastName field required</mat-error> 
-                        <mat-error *ngIf="userDetailsForm.controls['lastName'].hasError('pattern')">
-                            Only Alphabets with space</mat-error>
-                   </mat-form-field>
-                </div>
-
-                <div>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Gender</mat-label>
-                        <mat-select formControlName="gender">
-                            <mat-option value="male">Male</mat-option>
-                            <mat-option value="female">Female</mat-option>
-                            <mat-option value="transgender">Transgender</mat-option>
-                            <mat-option value="other">Other</mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="userDetailsForm.controls['gender'].hasError('required') &&
-                        (userDetailsForm.controls['gender'].touched || userDetailsForm.controls['gender'].untouched) ">
-                        Gender selection is required</mat-error> 
+<body>
+    <mat-card class="user-details-card">
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+            <mat-icon>account_circle</mat-icon>
+            <h2>User Details</h2>
+        </div>
+        <mat-card-content>
+            <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
+                <div fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center">
+                    <div>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>First Name</mat-label>
+                            <input matInput formControlName="firstName">
+                            <mat-error *ngIf="userDetailsForm.controls['firstName'].hasError('required') &&
+                            (userDetailsForm.controls['firstName'].touched || userDetailsForm.controls['firstName'].untouched) ">
+                            FirstName field required</mat-error> 
+                            <mat-error *ngIf="userDetailsForm.controls['firstName'].hasError('pattern')">
+                            Only Alphabets with space</mat-error>    
                     </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Email</mat-label>
-                        <input matInput formControlName="email" readonly="true">
-                        <mat-error *ngIf="userDetailsForm.controls['email'].hasError('required') &&
-                        (userDetailsForm.controls['email'].touched || userDetailsForm.controls['email'].untouched) ">
-                        Email field required</mat-error>                    
-                     </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Phone</mat-label>
-                        <input matInput formControlName="phone" maxlength="15">
-                        <mat-error *ngIf="userDetailsForm.controls['phone'].hasError('required') &&
-                        (userDetailsForm.controls['phone'].touched || userDetailsForm.controls['phone'].untouched) ">
-                        Phone Number field required</mat-error> 
-                        <mat-error *ngIf="userDetailsForm.controls['phone'].hasError('pattern')">
-                            Phone should contain only numbers</mat-error> 
-                        <mat-hint align="end">{{userDetailsForm.controls['phone'].value.length || 0}}/15</mat-hint>
-                  </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Street</mat-label>
-                        <input matInput formControlName="street">
-                        <mat-error *ngIf="userDetailsForm.controls['street'].hasError('required') &&
-                        (userDetailsForm.controls['street'].touched || userDetailsForm.controls['street'].untouched) ">
-                        Street Name field required</mat-error>
-               </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>City</mat-label>
-                        <input matInput formControlName="city">
-                        <mat-error *ngIf="userDetailsForm.controls['city'].hasError('required') &&
-                        (userDetailsForm.controls['city'].touched || userDetailsForm.controls['city'].untouched) ">
-                        City  field required</mat-error>
-                        <mat-error *ngIf="userDetailsForm.controls['city'].hasError('pattern')">
-                            Only Alphabets with space</mat-error>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Last Name</mat-label>
+                            <input matInput formControlName="lastName">
+                            <mat-error *ngIf="userDetailsForm.controls['lastName'].hasError('required') &&
+                            (userDetailsForm.controls['lastName'].touched || userDetailsForm.controls['lastName'].untouched) ">
+                            LastName field required</mat-error> 
+                            <mat-error *ngIf="userDetailsForm.controls['lastName'].hasError('pattern')">
+                                Only Alphabets with space</mat-error>
+                       </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Gender</mat-label>
+                            <mat-select formControlName="gender">
+                                <mat-option value="male">Male</mat-option>
+                                <mat-option value="female">Female</mat-option>
+                                <mat-option value="transgender">Transgender</mat-option>
+                                <mat-option value="other">Other</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="userDetailsForm.controls['gender'].hasError('required') &&
+                            (userDetailsForm.controls['gender'].touched || userDetailsForm.controls['gender'].untouched) ">
+                            Gender selection is required</mat-error> 
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput formControlName="email" readonly="true">
+                            <mat-error *ngIf="userDetailsForm.controls['email'].hasError('required') &&
+                            (userDetailsForm.controls['email'].touched || userDetailsForm.controls['email'].untouched) ">
+                            Email field required</mat-error>                    
+                         </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Phone</mat-label>
+                            <input matInput formControlName="phone" maxlength="15">
+                            <mat-error *ngIf="userDetailsForm.controls['phone'].hasError('required') &&
+                            (userDetailsForm.controls['phone'].touched || userDetailsForm.controls['phone'].untouched) ">
+                            Phone Number field required</mat-error> 
+                            <mat-error *ngIf="userDetailsForm.controls['phone'].hasError('pattern')">
+                                Phone should contain only numbers</mat-error> 
+                            <mat-hint align="end">{{userDetailsForm.controls['phone'].value.length || 0}}/15</mat-hint>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Street</mat-label>
+                            <input matInput formControlName="street">
+                            <mat-error *ngIf="userDetailsForm.controls['street'].hasError('required') &&
+                            (userDetailsForm.controls['street'].touched || userDetailsForm.controls['street'].untouched) ">
+                            Street Name field required</mat-error>
                    </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>City</mat-label>
+                            <input matInput formControlName="city">
+                            <mat-error *ngIf="userDetailsForm.controls['city'].hasError('required') &&
+                            (userDetailsForm.controls['city'].touched || userDetailsForm.controls['city'].untouched) ">
+                            City  field required</mat-error>
+                            <mat-error *ngIf="userDetailsForm.controls['city'].hasError('pattern')">
+                                Only Alphabets with space</mat-error>
+                       </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>State</mat-label>
+                            <input matInput formControlName="state">
+                            <mat-error *ngIf="userDetailsForm.controls['state'].hasError('required') &&
+                            (userDetailsForm.controls['state'].touched || userDetailsForm.controls['state'].untouched) ">
+                            State  field required</mat-error>  
+                            <mat-error *ngIf="userDetailsForm.controls['state'].hasError('pattern')">
+                                Only Alphabets with space</mat-error>                 
+                         </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Country</mat-label>
+                            <input matInput formControlName="country">
+                            <mat-error *ngIf="userDetailsForm.controls['country'].hasError('required') &&
+                            (userDetailsForm.controls['country'].touched || userDetailsForm.controls['country'].untouched) ">
+                            Country  field required</mat-error> 
+                            <mat-error *ngIf="userDetailsForm.controls['country'].hasError('pattern')">
+                                Only Alphabets with space</mat-error>                   
+                         </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Zip Code</mat-label>
+                            <input matInput formControlName="zip" maxlength="6">
+                            <mat-error *ngIf="userDetailsForm.controls['zip'].hasError('required') &&
+                            (userDetailsForm.controls['zip'].touched || userDetailsForm.controls['zip'].untouched) ">
+                            Zip Code  field required</mat-error> 
+                            <mat-error *ngIf="userDetailsForm.controls['zip'].hasError('pattern')">
+                            Code should contain only numbers</mat-error> 
+                            <mat-hint align="end">{{userDetailsForm.controls['zip'].value.length || 0}}/6</mat-hint>                   
+                         </mat-form-field>
+                    </div>
+                    <div fxLayoutAlign="center">
+                        <button class="save-button" type="submit">Save</button>
+                    </div>
                 </div>
-                <div>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>State</mat-label>
-                        <input matInput formControlName="state">
-                        <mat-error *ngIf="userDetailsForm.controls['state'].hasError('required') &&
-                        (userDetailsForm.controls['state'].touched || userDetailsForm.controls['state'].untouched) ">
-                        State  field required</mat-error>  
-                        <mat-error *ngIf="userDetailsForm.controls['state'].hasError('pattern')">
-                            Only Alphabets with space</mat-error>                 
-                     </mat-form-field>
-                </div>
-
-                <div>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Country</mat-label>
-                        <input matInput formControlName="country">
-                        <mat-error *ngIf="userDetailsForm.controls['country'].hasError('required') &&
-                        (userDetailsForm.controls['country'].touched || userDetailsForm.controls['country'].untouched) ">
-                        Country  field required</mat-error> 
-                        <mat-error *ngIf="userDetailsForm.controls['country'].hasError('pattern')">
-                            Only Alphabets with space</mat-error>                   
-                     </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Zip Code</mat-label>
-                        <input matInput formControlName="zip" maxlength="6">
-                        <mat-error *ngIf="userDetailsForm.controls['zip'].hasError('required') &&
-                        (userDetailsForm.controls['zip'].touched || userDetailsForm.controls['zip'].untouched) ">
-                        Zip Code  field required</mat-error> 
-                        <mat-error *ngIf="userDetailsForm.controls['zip'].hasError('pattern')">
-                        Code should contain only numbers</mat-error> 
-                        <mat-hint align="end">{{userDetailsForm.controls['zip'].value.length || 0}}/6</mat-hint>                   
-                     </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center">
-                    <button class="save-button" type="submit">Save</button>
-                </div>
-            </div>
-        </form>
-    </mat-card-content>
-</mat-card>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</body>
