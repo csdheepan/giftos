@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ShippingDetails } from 'src/app/core/model/placed-product-model';
+import { ShippingDetails } from 'src/app/core/model/product-model';
 import { InMemoryCache } from 'src/app/shared/services/memory-cache';
 
 
@@ -13,7 +13,10 @@ export class OrderPlacedComponent implements OnInit {
 
   shippingDetails !: ShippingDetails;
 
-  constructor(private router: Router, private store: InMemoryCache) {}
+  constructor(
+    private router: Router, 
+    private store: InMemoryCache
+  ) {}
 
   ngOnInit(): void {
     const shippingDetailsJson = this.store.getItem('SHIPPING_DETAILS');

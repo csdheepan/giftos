@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/core/services/user.service';
+import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
 import { InMemoryCache } from 'src/app/shared/services/memory-cache';
 
 @Component({
@@ -18,7 +19,8 @@ export class UserAccountComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private store: InMemoryCache,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   ngOnInit(): void {
@@ -59,17 +61,26 @@ export class UserAccountComponent implements OnInit {
         zip: data[0]?.zip || '',
         gender: data[0]?.gender || ''
       });
-    });
+    },
+    (err:any)=>{
+      this.errorHandlerService.handleErrors(err, "retrieving user details")
+    }
+  );
     
   }
 
   onSubmit(): void {
     if (this.userDetailsForm.valid) {
       const userDetails = this.userDetailsForm.value;
-      this.userService.userDetails(userDetails, this.userDetail.id);
-      this.snackBar.open('User Details saved successfully', 'Close', {
-        duration: 4000
-      });
+      this.userService.userDetails(userDetails, this.userDetail.id).subscribe((data:any)=>{
+        this.snackBar.open('User Details saved successfully', 'Close', {
+          duration: 4000
+        });
+      },
+      (err:any)=>{
+        this.errorHandlerService.handleErrors(err, "Update user details")
+      }
+    );
     }
   }
 }

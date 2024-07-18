@@ -18,9 +18,9 @@ export class CartProductService {
     const data = { product: productList }
 
     // Delete existing data and set new data
-     cartProductsRef.delete().then(() => {
-       cartProductsRef.set(data);
-    });
+    return from(cartProductsRef.delete().then(() => {
+      cartProductsRef.set(data);
+   })) 
 
   }
 
@@ -34,7 +34,7 @@ export class CartProductService {
   }
 
 
-  placedProduct(productList: any, id: string){
+  placeOrder(productList: any, id: string){
 
     let docId = this.afs.createId();
     // Reference to the 'Cart Products' object field under the user's document
@@ -42,12 +42,12 @@ export class CartProductService {
   
     const data = { product: productList }
   
-    cartProductsRef.set(data);
+    return from(cartProductsRef.set(data));
 
   }
 
 
-  DeleteCartItem(id: string) : Observable<any> {
+  deleteCartItem(id: string) : Observable<any> {
 
     // Reference to the 'Cart Products' object field under the user's document
     const deleteCartRef = this.afs.collection(`register/${id}/Cart Products`).doc(id);

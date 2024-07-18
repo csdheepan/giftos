@@ -1,8 +1,4 @@
-
-
-
 export class SignUp{
-
     profile !: string;
     email !: string;
     passcode !: string;

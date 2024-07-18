@@ -6,6 +6,10 @@ import { Login, SignUp } from 'src/app/core/model/login-model';
 import { LoginService } from 'src/app/core/services/login.service';
 import { InMemoryCache } from 'src/app/shared/services/memory-cache';
 
+/**
+ * Component responsible for handling user signup/login functionality.
+ */
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -71,6 +75,12 @@ export class LoginComponent implements OnInit {
     this.resetForm();
   }
 
+    /**
+  * Attempt to login the user.
+  * If the provided email and password match an existing registered user's credentials,
+  * The user is authenticated and redirected to their profile page.
+  * Otherwise, an error message is displayed indicating invalid login credentials.
+  */
   login(): void {
     if (this.loginForm.invalid) return;
 
@@ -100,6 +110,12 @@ export class LoginComponent implements OnInit {
     }, 1000);
   }
 
+   /**
+  * Check if the provided email already exists in the database.
+  * This method is used to prevent conflicts and ensure uniqueness of email addresses.
+  * If the email exists, an error is displayed to the user indicating that the email is already registered.
+  * @param email The email to be checked for existence in the database.
+  */
   checkValidation(email: string): void {
     if (email && this.signupForm.controls['email'].valid) {
       this.loginService.getRegisterUser().pipe(take(1)).subscribe((data: SignUp[]) => {
@@ -111,6 +127,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * Create a new user account and store the details in the database.
+   * The user's name, email, and password are obtained from the signup form,
+   * and upon successful creation of the account, the user is redirected to the login page.
+   */
   signUp(): void {
     if (this.signupForm.invalid) return;
 

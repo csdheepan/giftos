@@ -12,6 +12,7 @@ import { GiftosComponent } from './giftos/giftos.component';
 import { DatePipe } from '@angular/common';
 import { SharedModule } from './shared/shared-module';
 import { AuthModuleModule } from './auth-module/auth-module.module';
+import { UserControlModule } from './user-control/user-control.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AuthModuleModule } from './auth-module/auth-module.module';
     FormsModule,
     SharedModule,
     AuthModuleModule,
+    UserControlModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [DatePipe],

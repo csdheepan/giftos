@@ -1,5 +1,5 @@
 <body>
-  <div class="orders-container">
+  <div class="orders-container" *ngIf="!showNoOrders">
     <div *ngFor="let order of orders; index as i" class="order-card">
       <mat-card>
         <mat-card-header>
@@ -28,7 +28,7 @@
               <img [src]="product.image" [alt]="product.name" class="product-image">
               <div class="product-info">
                 <p class="product-name">{{ product.name }}</p>
-                <p class="product-price">{{ product.price | currency }}</p>
+                <p class="product-price">{{ product.price }}</p>
                 <p class="product-discount">{{ product.discount }}</p>
               </div>
             </div>
@@ -50,10 +50,10 @@
         <mat-card-actions></mat-card-actions>
       </mat-card>
     </div>
-    <div *ngIf="orders.length === 0" class="empty-orders">
-      <h2>No Orders Yet!</h2>
-      <p>It looks like you haven't placed any orders with us. Start exploring our wide range of products and find something you love.</p>
-      <button (click)="navigateToProducts()">Browse Products</button>
-    </div>
+  </div>
+  <div *ngIf="showNoOrders" class="empty-orders">
+    <h2>No Orders Yet!</h2>
+    <p>It looks like you haven't placed any orders with us. Start exploring our wide range of products and find something you love.</p>
+    <button (click)="navigateToProducts()">Browse Products</button>
   </div>
 </body>

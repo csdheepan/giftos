@@ -6,12 +6,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 
 
 @NgModule({
   declarations: [
     PageNotFoundComponent,
-    LogoutComponent
+    LogoutComponent,
+    ErrorDialogComponent
   ],
   imports: [
     CommonModule,

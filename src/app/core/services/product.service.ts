@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, from } from 'rxjs';
 
 @Injectable({
@@ -7,34 +7,30 @@ import { Observable, from } from 'rxjs';
 })
 export class ProductService {
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) {}
 
-
+  /**
+   * Adds a list of products to the Firestore database under the specified user ID.
+   * @param allProducts - The list of products to be added.
+   * @param id - The unique ID of the user.
+   * @returns Observable from the Firestore set operation.
+   */
   addProductItem(allProducts: any, id: string) {
 
-    // Reference to the 'Cart Products' object field under the user's document
     const cartProductsRef = this.afs.collection(`register/${id}/All Products`).doc(id);
 
-    const data = { product: allProducts }
+    const data = { product: allProducts };
 
     // Delete existing data and set new data
-     cartProductsRef.delete().then(() => {
-       cartProductsRef.set(data);
-    });
-
+    return from(cartProductsRef.delete().then(() => cartProductsRef.set(data)));
   }
 
+  /**
+   * Retrieves all products from the Firestore database for the specified user ID.
+   * @param id - The unique ID of the user.
+   * @returns Observable containing an array of products.
+   */
   getAllProducts(id: string): Observable<any[]> {
-
-    // Reference to the 'Cart Products' collection under the document with ID 'id' in the 'register' collection
-    const productsCollection: AngularFirestoreCollection<any> = this.afs.collection('register').doc(id).collection('All Products');
-
-    // Get all documents from the 'products' collection and map them to an array of products
-    return productsCollection.valueChanges();
+       return this.afs.collection('register').doc(id).collection('All Products').valueChanges();
   }
-
-
 }
-
-
-

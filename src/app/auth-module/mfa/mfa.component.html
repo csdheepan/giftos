@@ -1,18 +1,15 @@
 <div class="container-wrapper">
   <div class="inner-container">
-    <form #verificationForm="ngForm" (ngSubmit)="authentication(code)">
+    <form #verificationForm="ngForm" (ngSubmit)="authenticate(code)">
       <div fxLayout="column" fxLayoutAlign="space-around">
         <h1><mat-icon>lock</mat-icon> Two Step Verification</h1>
         <p>Enter the 2-step Verification Code that we sent to your email {{ userName }}</p>
-        
         <div class="alert" *ngIf="showAlert">Invalid Code</div>
-
         <mat-form-field appearance="outline">
           <mat-label>Verification Code</mat-label>
-          <input matInput placeholder="Enter your code" name="code" [(ngModel)]="code" required type="number">
+          <input matInput placeholder="Enter your code" name="code" [(ngModel)]="code" type="number" required>
           <mat-error *ngIf="verificationForm.touched">Verification code is required</mat-error>
         </mat-form-field>
-
         <button type="submit" class="account-button" [disabled]="verificationForm.invalid">Submit</button>
       </div>
     </form>
