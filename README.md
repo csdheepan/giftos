@@ -27,60 +27,25 @@ While the current implementation does not include payment integration, it provid
 - Order Processing: Review your cart and place an order.
 
 ## Project Structure:
-The project is structured with the following modules:
 
-- Root Module : This is the main module of the Angular application, serving as the entry point and orchestrating the loading of other modules.
-
-- Angular Material Module : This module likely contains imports and configurations related to Angular Material, a UI component library for Angular applications.
-
-- giftos: This is the landing page component of the application. It serves as the first point of interaction for users, showcasing featured products and special offers.
-
-## core Module
-
-- model: This module defines the data models and interfaces used throughout the application. These models ensure consistent data structures.
-
-- guard: This module includes security features, specifically using Angular's CanActivate guard to protect routes that require authentication.
-
-- services: This module contains service files that manage business logic and data interactions. Services handle API calls and data processing.
-
-
-## Shared-Module
-
-  - component:
-  
-  - 1.page-not-found: This component includes the 404 error page. It is displayed when a user navigates to a non-existent route.
-
-   - 2.page-not-found: This component includes Logout Functionality. It is displayed pop Up Is user want to logout?.
-     
-   - Modal: This module contains modal components used across the application. Modals are used for dialogs, alerts, and other pop-up interactions.
-
-- shared: This module contains shared components, directives, and pipes that are used across the application. It promotes code reuse and consistency.
-
-## auth-module:
-- login: This component handles user login functionality. It includes forms and services for user authentication.
-
-- mfa: This component implements two-step verification for enhanced security. It manages the setup and verification processes for multi-factor authentication.
-
-## user-control-module:
-
-- cart-products: This component handles the display of products in the user's cart and the orders they have placed. It includes logic and services to manage the cart and order data.
-
-- full: This component implements a side menu bar for navigation. It acts as a parent for various child routes, enabling easy navigation between different parts of the application.
-
-- product: This component handles the display of all products. It includes logic for listing products, displaying product details, and filtering/searching products.
-
-- order-placed: This component provides the order confirmation message. It displays a confirmation message and order details once a user places an order.
-
-- user-order: This component allows users to view the orders they have placed. It includes logic for displaying order history and details.
-
-- user-details: This component manages user details and profiles. It includes logic and services for displaying and updating user information.
-
-
-- assets
-  --Images :  Stores all images used in the application.
-
-- environment
-  --environment.ts- It contains Firebase authentication details
+- **Root Module:** Main entry point orchestrating the loading of other modules.
+- **Angular Material Module:** Configurations related to Angular Material UI components.
+- **Core:**
+  - **Guard:** Router guards for security purposes.
+  - **Service:** Handles data access and business logic.
+  - **Model:** Defines data structures used in the application.
+- **Auth Module:**
+  - **Login Component:** Responsible for user authentication and login interface.
+  - **Mfa Component:** Responsible for user Secure authentication with OTP.
+- **user-control-module:** Manages user details, carts, products, orders and other related functionalities.
+- **Shared Module:**
+  - **Components:** Reusable UI components like logout dialog, error dialog, and page-not-found.
+  - **Service:** Shared services providing common functionality.
+  - **Styles:** Common styles used across components.
+- **Assets:**
+  - **Images:** Stores images used in the application.
+- **Environment:**
+  - **environment.ts:** Firebase authentication configuration.
 
 ## Setup and Installation:
 1. Clone the repository using the command 👉🏻 git clone https://github.com/csdheepan/giftos.git
