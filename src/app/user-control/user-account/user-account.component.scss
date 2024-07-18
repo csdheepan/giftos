@@ -1,0 +1,44 @@
+.user-details-card {
+  max-width: 680px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.full-width {
+  width: 100%;
+  margin: 10px 0px;
+}
+
+mat-icon {
+  transform: scale(3);
+  margin: 20px 0px 0px 0px;
+  position: relative;
+  top: 10px;
+  color: #f75151;
+}
+
+h2 {
+  margin: 40px 0px;
+  font-size: 2em;
+  white-space: nowrap;
+}
+
+mat-error {
+  margin: 5px -15px;
+}
+
+.save-button {
+  padding: 10px 30px;
+  background: #f75151;
+  border: 1px solid #f75151;
+  color: white;
+  border-radius: 5px;
+  font-family: system-ui;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background: transparent;
+  color: #f75151;
+}

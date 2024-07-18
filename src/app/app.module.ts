@@ -9,35 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environment/environment';
 import { AngularFireModule} from '@angular/fire/compat'
 import { GiftosComponent } from './giftos/giftos.component';
-import { ProductsComponent } from './products/products.component';
-import { InMemoryCache } from './services/cache-services';
-import { OrderPlacedComponent } from './order-placed/order-placed.component';
 import { DatePipe } from '@angular/common';
-import { LoginComponent } from './login/login.component';
-import { MfaComponent } from './mfa/mfa.component';
-import { FullComponent } from './full/full.component';
-import { UserAccountComponent } from './user-account/user-account.component';
-import { UserOrdersComponent } from './user-orders/user-orders.component';
-import { ProductDialogComponent } from './modal/product-dialog/product-dialog.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { LogoutComponent } from './modal/logout/logout.component';
-import { CartProductsComponent } from './cart-products/cart-products.component';
+import { SharedModule } from './shared/shared-module';
+import { AuthModuleModule } from './auth-module/auth-module.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     GiftosComponent,
-    ProductsComponent,
-    CartProductsComponent,
-    OrderPlacedComponent,
-    LoginComponent,
-    MfaComponent,
-    FullComponent,
-    UserAccountComponent,
-    UserOrdersComponent,
-    ProductDialogComponent,
-    PageNotFoundComponent,
-    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +26,11 @@ import { CartProductsComponent } from './cart-products/cart-products.component';
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
+    SharedModule,
+    AuthModuleModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [InMemoryCache,DatePipe],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

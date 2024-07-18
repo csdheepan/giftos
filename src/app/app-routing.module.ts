@@ -1,16 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GiftosComponent } from './giftos/giftos.component';
-import { ProductsComponent } from './products/products.component';
-import { OrderPlacedComponent } from './order-placed/order-placed.component';
-import { LoginComponent } from './login/login.component';
-import { MfaComponent } from './mfa/mfa.component';
-import { FullComponent } from './full/full.component';
-import { UserAccountComponent } from './user-account/user-account.component';
-import { UserOrdersComponent } from './user-orders/user-orders.component';
-import { AuthGuard} from './guard/auth.guard'
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CartProductsComponent } from './cart-products/cart-products.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -18,48 +9,12 @@ const routes: Routes = [
     component: GiftosComponent
   },
   {
-    path:"login",
-    component : LoginComponent
+    path:'auth',
+    loadChildren:()=> import('./auth-module/auth-module.module').then(m=> m.AuthModuleModule)
   },
   {
-    path:'mfa',
-    component: MfaComponent
-  },
-  {
-    path : "order-placed",
-    component : OrderPlacedComponent
-  },
-  {
-    path: 'full',
-    component: FullComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path:"products",
-        component : ProductsComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path:"home",
-        component : GiftosComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path:"cart",
-        component : CartProductsComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path : "account",
-        component: UserAccountComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path : "orders",
-        component: UserOrdersComponent,
-        canActivate: [AuthGuard],
-      }
-    ]
+    path:'user',
+    loadChildren:()=> import('./user-control/user-control.module').then(m=> m.UserControlModule)
   },
   {path: '404', component: PageNotFoundComponent},
   {path: '**', redirectTo: '/404'}
