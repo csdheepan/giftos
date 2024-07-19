@@ -42,7 +42,7 @@
   
   .alert {
     padding: 15px;
-    background-color: #f75151;
+    background-color: #f44336db;
     color: white;
     margin: -10px 0px 30px 0px;
     width: 93%;
@@ -70,3 +70,10 @@
     left: -2px;
   }
   
+.loader::ng-deep circle {
+    stroke: #f75151 !important;
+}
+
+mat-spinner {
+    margin: 20px 0px;
+}

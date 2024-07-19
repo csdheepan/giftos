@@ -26,24 +26,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   debounceTimer!: any;
   subscriptions: Subscription[] = [];
 
-  @HostListener('document:mousewheel', ['$event'])
-  onDocumentMousewheelEvent(event: Event): void {
-    if (this.debounceTimer) {
-      clearTimeout(this.debounceTimer);
-    }
-
-    this.debounceTimer = setTimeout(() => {
-      const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const clientHeight = document.documentElement.clientHeight;
-
-      if (scrollTop + clientHeight >= scrollHeight) {
-        console.log("Load data from Infinite scroll");
-        // this.loadMoreProducts();
-      }
-    }, 500);
-  }
-
   constructor(
     private store: InMemoryCache,
     private snackBar: MatSnackBar,
@@ -144,5 +126,27 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.snackBar.open(message, 'Close', {
       duration: 5000 // Duration in milliseconds (5 seconds)
     });
+  }
+
+/**
+ * 
+ * Todo - Issue Occur want to fix it 
+ */
+  @HostListener('document:mousewheel', ['$event'])
+  onDocumentMousewheelEvent(event: Event): void {
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
+    }
+
+    this.debounceTimer = setTimeout(() => {
+      const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+
+      if (scrollTop + clientHeight >= scrollHeight) {
+        console.log("Load data from Infinite scroll");
+        // this.loadMoreProducts();
+      }
+    }, 500);
   }
 }

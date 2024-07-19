@@ -13,6 +13,8 @@ export class MfaComponent implements OnInit {
   generatedCode!: number;
   showAlert: boolean = false;
   userName!: string;
+  showButton : boolean= true;
+  loader:boolean=false;
 
   constructor(
     private emailService: EmailService,
@@ -53,6 +55,11 @@ export class MfaComponent implements OnInit {
    * @param value The code entered by the user.
    */
   authenticate(value: number): void {
+    this.showButton = false;
+    this.loader=true;
+   setTimeout(() => {
+    this.showButton = true;
+    this.loader=false;
     if (value === this.generatedCode) {
       this.showAlert = false;
       this.store.setItem('USER_AUTH', "User Authenticated Successfully");
@@ -60,5 +67,6 @@ export class MfaComponent implements OnInit {
     } else {
       this.showAlert = true;
     }
+   }, 1000);
   }
 }

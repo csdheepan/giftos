@@ -14,7 +14,7 @@
 
   <section>
     <div>
-      <div class="product-container">
+      <div class="product-container" >
         <div class="box" *ngFor="let product of listProducts">
           <div fxLayout="row" fxLayoutAlign="space-between center">
             <mat-icon [ngClass]="{'liked': product.likedProduct}" (click)="handleLike(product)">

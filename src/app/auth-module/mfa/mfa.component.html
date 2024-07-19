@@ -10,8 +10,11 @@
           <input matInput placeholder="Enter your code" name="code" [(ngModel)]="code" type="number" required>
           <mat-error *ngIf="verificationForm.touched">Verification code is required</mat-error>
         </mat-form-field>
-        <button type="submit" class="account-button" [disabled]="verificationForm.invalid">Submit</button>
-      </div>
+        <button type="submit" *ngIf="showButton" class="account-button" [disabled]="verificationForm.invalid">Submit</button>
+        <div *ngIf="loader" fxLayout="row" fxLayoutAlign="center center">
+          <mat-spinner diameter="40" class="loader"></mat-spinner>
+        </div>
+       </div>
     </form>
   </div>
 </div>

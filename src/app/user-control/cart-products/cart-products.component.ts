@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SignUp } from 'src/app/core/model/login-model';
 import { InMemoryCache } from 'src/app/shared/services/memory-cache';
@@ -60,7 +60,7 @@ export class CartProductsComponent implements OnInit, OnDestroy {
   }
 
   private loadUserCartProducts(): void {
-    const cartProductSubscription = this.cartProductService.getCartProducts(this.userDetail.id).subscribe(
+    const cartProductSubscription = this.cartProductService.getCartProducts(this.userDetail.id).pipe(take(1)).subscribe(
       data => {
         this.listProducts = data.length ? data[0].product : [];
         this.calculatePrice();
