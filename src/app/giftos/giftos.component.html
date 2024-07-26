@@ -120,8 +120,8 @@
 </section>
 
 <!-- Gift Section -->
-<section id="gift-mode">
-  <div class="banner-container">
+<section>
+  <div class="banner-container" id="gift-mode">
     <div>
       <img [src]="giftImage">
     </div>
@@ -177,29 +177,36 @@
 <!-- Contact Section -->
 <section #contact>
   <h2>CONTACT</h2>
-  <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+  <div fxLayout="row wrap" fxLayoutAlign="space-evenly center" fxLayout.xs="column" fxLayout.sm="column" style="margin: 40px 0px;">
     <div>
-      <img [src]="contactImg" width="300px" class="contact-img">
+      <img [src]="contactImg" width="300px" height="300px" class="contact-img">
     </div>
     <div fxLayout="column" fxLayoutGap="20px">
-      <mat-form-field appearance="outline">
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Your name">
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="Your email">
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Phone Number</mat-label>
-        <input matInput placeholder="Your phone number">
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Message</mat-label>
-        <textarea matInput placeholder="Your message" rows="4"></textarea>
-      </mat-form-field>
+      <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+        <div fxLayout="column" class="form-field-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Your name">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Your email">
+          </mat-form-field>
+        </div>
+        <div fxLayout="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input matInput placeholder="Your phone number">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Message</mat-label>
+            <input matInput placeholder="Your message">
+          </mat-form-field>
+        </div>
+      </div>
+     
       <div fxLayout="row" fxLayoutAlign="center center">
-        <button mat-flat-button color="warn" class="customize-btn">Send</button>
+        <button mat-flat-button color="warn" class="customize-btn" style="margin: 0px;">Send</button>
       </div>
     </div>
   </div>
