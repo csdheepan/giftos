@@ -89,17 +89,35 @@ export class CartProductsComponent implements OnInit, OnDestroy {
 
   private calculatePrice(): void {
     if (this.listProducts.length) {
-      const totalPrice = this.listProducts.reduce((acc, product) => acc + parseFloat(product.price.replace('$', '')), 0);
-      this.overallPrice = totalPrice.toFixed(2);
-      this.discount = (totalPrice * 0.1).toFixed(2);
-      const totalCostBeforeTax = totalPrice - parseFloat(this.discount);
-      const taxPercentage = 5;
-      this.tax = ((totalCostBeforeTax * taxPercentage) / 100).toFixed(2);
-      this.totalCost = (totalCostBeforeTax + parseFloat(this.tax)).toFixed(2);
+        // Calculate total price
+        const totalPrice = this.listProducts.reduce((acc, product) => 
+            acc + parseFloat(product.price.replace('₹', '').replace(/,/g, '')), 0
+        );
+
+        // Format total price with commas and update overall price
+        this.overallPrice = this.formatPrice(totalPrice);
+
+        // Calculate discount (assuming 10% discount)
+        this.discount = this.formatPrice(totalPrice * 0.1);
+
+        // Calculate the total cost before tax
+        const totalCostBeforeTax = totalPrice - parseFloat(this.discount.replace(/,/g, ''));
+
+        // Tax calculation (assuming 5% tax)
+        const taxPercentage = 5;
+        this.tax = this.formatPrice((totalCostBeforeTax * taxPercentage) / 100);
+
+        // Calculate final total cost including tax
+        this.totalCost = this.formatPrice(totalCostBeforeTax + parseFloat(this.tax.replace(/,/g, '')));
     } else {
-      this.resetPrice();
+        this.resetPrice();
     }
-  }
+}
+
+// Helper method to format price with commas and INR symbol
+private formatPrice(amount: number): string {
+    return amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
 
   private resetPrice(): void {
     this.overallPrice = "0";

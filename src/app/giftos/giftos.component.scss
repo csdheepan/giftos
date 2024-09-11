@@ -32,7 +32,9 @@ section h2 {
   font-weight: 500;
 }
 
-
+mat-icon{
+  cursor: pointer;
+}
 
 // styles for nav menu
 
@@ -487,7 +489,9 @@ footer svg {
   margin: 25px;
 }
 
-
+.account-container p{
+  cursor: pointer;
+}
 
 //styles for mobile view
 

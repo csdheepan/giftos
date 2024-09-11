@@ -20,6 +20,18 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.whole-card{
+  margin: 20px 0px;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 15px;
+  padding: 20px;
+}
+.inner-card{
+  margin: 0px 20px;
+  border-radius: 10px;
+  padding: 5px 15px;
+}
+
 .order-status-avatar {
   background-color: #f75151;
   border-radius: 50%;
@@ -217,13 +229,14 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  text-align: left;
 }
 
 .order-info p {
   display: flex;
   align-items: center;
   margin: 0;
-  font-size: 16px;
+  font-size: 1em;
 }
 
 .order-info p mat-icon {
@@ -233,7 +246,7 @@ button {
 
 .order-info p strong {
   font-weight: bold;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 @media (max-width: 680px) {
